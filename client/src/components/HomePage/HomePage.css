@@ -1,6 +1,13 @@
+.demo-grid-1{
+    text-align: center;
+}
+.asside{
+    text-align: left;
+}
 
-
-
-.cartbox{
-    display: inline-flex;
+.product-wrapper{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
 }

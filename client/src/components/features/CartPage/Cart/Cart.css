@@ -1,0 +1,62 @@
+
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+
+.table td, .table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){background-color: #f2f2f2;}
+
+.table tr:hover {background-color: #ddd;}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:#333;
+    color: white;
+    opacity: 0.5;
+    height: 40px;
+}
+.table-body-row td button{
+    background: #333;
+    width: 40px;
+    color: #fff;
+
+}
+table{
+    border: 3px solid black;
+}
+
+tr:hover{
+    background: gray;
+    
+}
+
+
+
+.item-wrapper{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+.item-card{
+    width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1em;
+    text-align: left;
+    margin: 10px 10px;
+  }
+  
+  .product-card> .show-Grid{
+      padding-bottom: 1.5em
+  }

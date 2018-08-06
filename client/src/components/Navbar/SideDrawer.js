@@ -1,5 +1,6 @@
 import React from "react";
 import "./SideDrawer.css";
+import {NavLink} from "react-router-dom";
 
 
 const SideDrawer = props =>{
@@ -12,11 +13,11 @@ const SideDrawer = props =>{
         <div><h2>ASIIME-228</h2></div>
         <hr/>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/receiving">Receiving</a></li>            
-            <li><a href="/"><div >
-              Log Out</div></a></li>                     
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/cart">Cart</NavLink></li>
+            <li><NavLink to="/receiving">Receiving</NavLink></li>            
+            <li><NavLink to="/"><div >
+              Log Out</div></NavLink></li>                     
         </ul>
     </nav>
     );

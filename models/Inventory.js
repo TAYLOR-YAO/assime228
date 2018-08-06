@@ -12,7 +12,15 @@ const InventorySchema = new Schema({
         required:true
     },
     price:{
-        type:String,
+        type: Schema.Types.Decimal128,
+        required:true
+    },
+    // sku:{
+    //     type:Number,
+    //     required:true
+    // },
+    both:{
+        type:Number,
         required:true
     },
     details:{
@@ -26,6 +34,14 @@ const InventorySchema = new Schema({
     company:{
         type:String,
         required:true
+    },
+    brand:{
+        type:String,
+        require:true
+    },
+    updatedTime:{
+        type: Date,
+        default:Date.now
     }
 });
 

@@ -1,16 +1,13 @@
 import React, { Component } from "react";
+import {NavLink} from "react-router-dom";
 import "./Navbar.css";
 import ToggleDrawer from "./ToggleDrawer";
-import StoreCathegories from "./StoreCathegories";
+import UserProfile from "./UserProfile";
 
 class Navbar extends Component {
 
   state = {
     isSignedIn: false,
-    localStorageName: "",
-    userProfilePicture: "",
-    userDisplayName: "",
-    userID: "",
   
   }
  
@@ -19,34 +16,31 @@ class Navbar extends Component {
       <header className="toolBar">
         <nav className="toolBar-navigation">
           <div className="toolBar-logo"><a href="/login">Assime-228</a></div>
-          <div className="spacer"><StoreCathegories/></div>
+          <div className="spacer"></div>
           <div className="toolBar-links">
             <ul>  
               <li>
-                <div>
-                  <img src="http://peterboroughtakenote.com/wp-content/uploads/2015/11/blank-profile-picture-973461_1280-1024x1024.png"
-                    alt="Profile View" style={{ height: "50px", width: "50px" }}/>
+                <div><NavLink to="/" style={{textDecoration:"none"}}>User's Name</NavLink>
                 </div>
               </li>
               <li>
-                <a href="/">
-                  <div>
-                    Log Out
-                  </div>
-                </a>
+                <div>
+                  
+                   <UserProfile/>
+                </div>
               </li>
-              <li><a href="/">Home</a></li>
-              <li><a href="/receiving">Receiving</a></li> 
+              <li><NavLink to="/">Home</NavLink></li>
+              <li>< NavLink to="/receiving">Receiving</NavLink></li> 
               <li>
-                <a href="/cart">
+                <NavLink to="/cart">
                   <div className="cart">
-                    <img src="https://cdn4.iconfinder.com/data/icons/adiante-apps-app-templates-incos-in-grey/512/app_type_shop_512px_GREY.png"
+                    <img src="http://www.oceaneagleeye.com/images/marketplace.png"
                     alt="Shopping Cart"
                     style={{ height: "80%", width: "70px" }}
                     />
                     <p style={{position:"relative", bottom:"10px", left:"20px"}}>Cart</p>
                   </div>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div> 

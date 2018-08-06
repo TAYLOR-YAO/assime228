@@ -15,12 +15,9 @@
     text-decoration: none;
     display: flex;
 }
-.toolBar-logo{
-    margin-left: 0.5rem;
-}
+
 .spacer{
     flex: 1;
-    margin: 0 10px;
 }
 .toolBar-navigation{
     display: flex;

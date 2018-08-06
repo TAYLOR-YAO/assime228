@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import "./Receiving.css";
 import {Grid, Cell, Textfield,Button} from "react-mdl";
 import axios from "axios";
 class Receiving extends Component {
@@ -6,9 +7,12 @@ class Receiving extends Component {
         name:"",
         image:"",
         price:"",
+        both:"",
+        sku:"",
         details:"",
         category:"",
-        company:""
+        company:"",
+        brand:""
     }
 
     handleInputsChanges = event => {
@@ -22,22 +26,20 @@ class Receiving extends Component {
         console.log(this.state)
         axios.post("api/addinventory",this.state).then(items=>{
             console.log(items)
-        })
-        
-}
+        }); 
+    }
 
 
 
     render () {
     return(
-    <div style={{width: '80%', margin: 'auto'}}>
+    <div className="marchandises-box" style={{width: '80%', margin: 'auto'}}>
         <div style={{textAlign:"center"}}><h3>Add Inventory</h3></div>
         <Grid className="demo-grid-1">
-            <Cell col={6}>
-                <h6>Company Name</h6>
+            <Cell col={4}>
+                <h6>Company & Store Name</h6>
                 <Textfield
-                onChange={() => {}}
-                label="Company"
+                label="Company & Store"
                 floatingLabel
                 style={{width: "100%"}}
                 name="company"
@@ -45,10 +47,19 @@ class Receiving extends Component {
                 />
             </Cell>
 
-            <Cell col={6}>
-                <h6>Item Categoty</h6>
+            <Cell col={4}>
+                <h6>Brand</h6>
                 <Textfield
-                onChange={() => {}}
+                label="Brand"
+                floatingLabel
+                style={{width: '100%'}}
+                name="brand"
+                onChange={this.handleInputsChanges}
+                />
+            </Cell>
+            <Cell col={4}>
+                <h6>Categoty</h6>
+                <Textfield
                 label="category"
                 floatingLabel
                 style={{width: '100%'}}
@@ -62,7 +73,6 @@ class Receiving extends Component {
             <Cell col={4}>
                 <h6>Item Name</h6>
                 <Textfield
-                onChange={() => {}}
                 label="Item Name"
                 floatingLabel
                 style={{width: '100%'}}
@@ -73,7 +83,6 @@ class Receiving extends Component {
             <Cell col={4}>
                 <h6>Iteme Price</h6>
                 <Textfield
-                onChange={() => {}}
                 label="Iteme Price"
                 floatingLabel
                 style={{width: '100%'}}
@@ -85,7 +94,6 @@ class Receiving extends Component {
             <Cell col={4}>
                 <h6>Iteme Image</h6>
                 <Textfield
-                onChange={() => {}}
                 label="Iteme Image Url"
                 floatingLabel
                 style={{width: '100%'}}
@@ -97,14 +105,36 @@ class Receiving extends Component {
         </Grid>
 
         <Grid>
-            <Cell col={8}>
+            <Cell col={6}>
                 <h6>Item Details</h6>
                 <Textfield
-                    onChange={() => {}}
                     label="Item Details"
                     floatingLabel
                     style={{width: '100%'}}
                     name="details"
+                    onChange={this.handleInputsChanges}
+                />
+            </Cell>
+
+            {/* <Cell col={3}>
+                <h6>SKU</h6>
+                <Textfield
+                onChange={() => {}}
+                label="Iteme Item SKU"
+                floatingLabel
+                style={{width: '100%'}}
+                name="sku"
+                onChange={this.handleInputsChanges}
+                />
+            </Cell> */}
+
+            <Cell col={3}>
+                <h6>Both</h6>
+                <Textfield
+                    label="Both"
+                    floatingLabel
+                    style={{width: '100%'}}
+                    name="both"
                     onChange={this.handleInputsChanges}
                 />
             </Cell>

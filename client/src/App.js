@@ -24,11 +24,12 @@ class App extends Component {
     } 
     return (
       <div className="App">
+
         <Navbar drawerClickHandler={this.drawerTogglerHandler}/>
         <SideDrawer show={this.state.sideDrawerOpen}/>
         {backDrop}
-        <Router/>
-      </div>
+        <Router/>  
+    </div>
     );
   }
 }
