@@ -82,10 +82,6 @@ function Cart(props){
                 </div>)
             }
         </div>
-        {
-            // console.log(sort(props.cart)),
-            localStorage.setItem("cart", JSON.stringify(props.cart))
-        }
     </div>
 }
 

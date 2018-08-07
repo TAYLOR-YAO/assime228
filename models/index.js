@@ -1,4 +1,5 @@
 module.exports = {
-    Inventory: require("./Inventory")
+    Inventory: require("./Inventory"),
+    Cart: require("./Cart")
    
   };

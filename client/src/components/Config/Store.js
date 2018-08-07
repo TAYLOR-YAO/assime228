@@ -7,5 +7,5 @@ const store = createStore(
     routeReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
    );
-
+localStorage.setItem("store", JSON.stringify(store))
 export default store;

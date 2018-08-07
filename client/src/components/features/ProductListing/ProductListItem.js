@@ -5,7 +5,7 @@ import ItemDetails from "./ItemDetails";
 
 export default function ProductListItem(props){
     return<div style={{margin:"10px 10px"}} className="progucts">
-        <div className="copmpany-name-wrapper" value={props.company} name={props.company} onClick={props.displayComoanyArticles}>
+        <div className="copmpany-name-wrapper" data-attribute={props.company} name={props.company}  value={props.company} onClick={props.displayComoanyArticles}>
             <h4>{props.company}</h4>
         </div>
 

@@ -15,7 +15,7 @@ class HomePage extends Component {
     }
     componentDidMount = ()=>{
         axios.get("api/displayitems").then(response=>{
-            console.log(response.data)
+            // console.log(response.data)
 
             const categories = [];
             const companies = [];
@@ -50,25 +50,50 @@ class HomePage extends Component {
             )
             console.log("=========================")
             console.log(this.state)
-            // console.log(this.state.company)
-            
-            
+            // console.log(this.state.company)    
         })
-        
     }
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
+
+    handleCompanyChange = (selectedOption) => {
+        this.setState({ selectedOption});
         console.log(selectedOption.value);
+
+         axios.get('api/displaystoreitems', {
+            params: {
+              selected: selectedOption.value
+            }
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+    
+    handleCategoryChange = (selectedOption) => {
+        this.setState({ selectedOption});
+        console.log(selectedOption.value);
+         
     }
 
     displayComoanyArticles = event => {
         event.preventDefault();
-        console.log(event.target.value)
-        console.log(event.target.getAttribute('data-attribute'))
-        this.setState({ company: event.target.getAttribute('data-attribute') });
-        axios.get("api/displaystoreitems",{data:{company:"TayConnection"}}).then(response=>{
-            console.log(response)
-        })
+        // console.log(event.target.value)
+        // console.log(event.target.getAttribute('data-attribute'))
+        // this.setState({ company: event.target.getAttribute('data-attribute') });
+        // var name = "TayConnection"
+
+        // axios.get("api/displaystoreitems",
+        // {
+        //     params: {
+        //       name: name
+        //     }
+        // }).then(response=>{
+        //     console.log(response)
+        // }).catch(err=>{
+        //     console.log(`Error: ${err}`)
+        // })
       
         
     }
@@ -83,7 +108,7 @@ class HomePage extends Component {
                         <h5>Shop By Categories</h5>
                         <Select
                             value={this.state.selectedOption}
-                            onChange={this.handleChange}
+                            onChange={this.handleCategoryChange}
                             options={this.state.categories}
                         />
                         <hr/>
@@ -91,7 +116,7 @@ class HomePage extends Component {
                         
                         <Select
                             value={this.state.selectedOption}
-                            onChange={this.handleChange}
+                            onChange={this.handleCompanyChange}
                             options={this.state.companies}
                         />
                     </div>
