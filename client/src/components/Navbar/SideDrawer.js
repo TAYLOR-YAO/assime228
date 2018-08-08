@@ -15,7 +15,8 @@ const SideDrawer = props =>{
         <ul>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/cart">Cart</NavLink></li>
-            <li><NavLink to="/receiving">Receiving</NavLink></li>            
+              <li>< NavLink to="/inventory">Inventory</NavLink></li> 
+            <li><NavLink to="/receiving">Receiving</NavLink></li>           
             <li><NavLink to="/"><div >
               Log Out</div></NavLink></li>                     
         </ul>

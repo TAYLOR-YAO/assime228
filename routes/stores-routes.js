@@ -3,21 +3,34 @@ const mongoose = require("mongoose");
 const db = require("../models");
 const router = express.Router();
 
-router.get("/cart", (req, res) => {
-    console.log(req.body)
-
-});
-
-
+//================== find by Company ====================
 router.get("/displaystoreitems", (req, res) => {
-    console.log("Company")
-    console.log(req.body)
-    // db.Inventory.find({"company":req.body.data.company})
-    // .then(atternters=>{
-    //     console.log("companies", companies)
-    //     res.json(companies)
-    // })
-
+    db.Inventory.find({"company":req.query.company}).then(storeItems =>{
+        res.send(storeItems)
+    }).catch(err=>{
+        console.log(err);
+    });
 });
+
+//================== find by Category ====================
+router.get("/displaycategoryitems", (req, res) => {
+    db.Inventory.find({"category":req.query.category}).then(storeItems =>{
+        res.send(storeItems)
+    }).catch(err=>{
+        console.log(err);
+    });
+});
+
+//================== find by Type ====================
+router.get("/displaytypeitems", (req, res) => { 
+    db.Inventory.find({"type":req.query.type}).then(storeItems =>{
+        res.send(storeItems)
+    }).catch(err=>{
+        console.log(err);
+    });
+});
+
+
+
 
 module.exports = router;

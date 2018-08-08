@@ -29,5 +29,19 @@ router.get("/displayitems", (req, res)=>{
 });
 
 
+router.get("/products", (req, res)=>{
+    // console.log(req.body)
+    db.Inventory.find({}).then(products=>{
+        // console.log(items)
+        res.json(products)
+    })
+    .catch(function(err) {
+        console.error("ERR.....",err);
+    })
+
+});
+
+
+
 
 module.exports = router;

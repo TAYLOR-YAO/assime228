@@ -5,8 +5,9 @@ import ItemDetails from "./ItemDetails";
 
 export default function ProductListItem(props){
     return<div style={{margin:"10px 10px"}} className="progucts">
-        <div className="copmpany-name-wrapper" data-attribute={props.company} name={props.company}  value={props.company} onClick={props.displayComoanyArticles}>
-            <h4>{props.company}</h4>
+        <div className="copmpany-name-wrapper" style={{background:`${props.storeColor}`, color:`${props.textColor}`}} data-attribute={props.company} name={props.company}  value={props.company} onClick={props.displayComoanyArticles}>
+            <p>Store:</p>
+            <h5>{props.company}</h5>
         </div>
 
         <div className="item-image-wrapper">
@@ -15,20 +16,26 @@ export default function ProductListItem(props){
         <div className="item-infos">
             <h6>{props.name}</h6>
             <ItemDetails details={props.details}/>
-            <h4>${props.price}</h4>
+            <h5>${props.price}</h5>
         </div>
         <div className="addToCart">
             <AddToCartBtn 
             cartItem ={props.cartItem}
             product={props.product}
-            addToCart ={props.addToCart}/>
+            addToCart ={props.addToCart}
+            storeColor={props.storeColor}
+            textColor={props.textColor}
+            />
 
             {
                 props.cartItem
                 ? <RemoveBtn 
                 cartItem ={props.cartItem}
                 product={props.product}
-                removeFromCart ={props.removeFromCart}/>
+                removeFromCart ={props.removeFromCart}
+                storeColor={props.storeColor}
+                textColor={props.textColor}
+                />
                 : null
             }
             

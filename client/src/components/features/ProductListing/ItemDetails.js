@@ -10,7 +10,7 @@ export default class ItemDetails extends Component{
     
     render(){
         return(
-            <div>
+            <div style={{marginTop:"-15px"}}>
                 <Button
                     className="item-details-button"
                     bsStyle="link"

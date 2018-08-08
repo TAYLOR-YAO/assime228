@@ -11,6 +11,22 @@ const InventorySchema = new Schema({
         type:String,
         required:true
     },
+    type:{
+        type:String,
+        required:true
+    },
+    storeColor:{
+        type:String,
+        default: "maroon"
+    },
+    textColor:{
+        type:String,
+        default:"white"
+    },
+    color:{
+        type:String,
+        required:true
+    },
     price:{
         type: Schema.Types.Decimal128,
         required:true

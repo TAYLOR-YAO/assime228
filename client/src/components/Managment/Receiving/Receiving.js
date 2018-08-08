@@ -12,7 +12,11 @@ class Receiving extends Component {
         details:"",
         category:"",
         company:"",
-        brand:""
+        brand:"",
+        type:"",
+        color:"",
+        storeColor:"",
+        textColor:""
     }
 
     handleInputsChanges = event => {
@@ -69,8 +73,35 @@ class Receiving extends Component {
             </Cell>
         </Grid>
 
-        <Grid className="demo-grid-1">
+
+             <Grid className="demo-grid-1">
             <Cell col={4}>
+                <h6>Store Color</h6>
+                <Textfield
+                label="Store Color"
+                floatingLabel
+                style={{width: "100%"}}
+                name="storeColor"
+                onChange={this.handleInputsChanges}
+                />
+            </Cell>
+
+            <Cell col={4}>
+                <h6>Text Color</h6>
+                <Textfield
+                label="Text Color"
+                floatingLabel
+                style={{width: '100%'}}
+                name="textColor"
+                onChange={this.handleInputsChanges}
+                />
+            </Cell>
+        </Grid>
+
+
+
+        <Grid className="demo-grid-1">
+            <Cell col={3}>
                 <h6>Item Name</h6>
                 <Textfield
                 label="Item Name"
@@ -80,7 +111,17 @@ class Receiving extends Component {
                 onChange={this.handleInputsChanges}
                 />
             </Cell>
-            <Cell col={4}>
+            <Cell col={3}>
+                <h6>Item Type</h6>
+                <Textfield
+                label="Item Type"
+                floatingLabel
+                style={{width: '100%'}}
+                name="type"
+                onChange={this.handleInputsChanges}
+                />
+            </Cell>
+            <Cell col={3}>
                 <h6>Iteme Price</h6>
                 <Textfield
                 label="Iteme Price"
@@ -91,7 +132,7 @@ class Receiving extends Component {
                 />
             </Cell>
             
-            <Cell col={4}>
+            <Cell col={3}>
                 <h6>Iteme Image</h6>
                 <Textfield
                 label="Iteme Image Url"
@@ -115,11 +156,20 @@ class Receiving extends Component {
                     onChange={this.handleInputsChanges}
                 />
             </Cell>
+            <Cell col={3}>
+                <h6>Item Color</h6>
+                <Textfield
+                    label="Item Color"
+                    floatingLabel
+                    style={{width: '100%'}}
+                    name="color"
+                    onChange={this.handleInputsChanges}
+                />
+            </Cell>
 
             {/* <Cell col={3}>
                 <h6>SKU</h6>
                 <Textfield
-                onChange={() => {}}
                 label="Iteme Item SKU"
                 floatingLabel
                 style={{width: '100%'}}

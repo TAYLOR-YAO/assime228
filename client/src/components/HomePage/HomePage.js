@@ -7,19 +7,20 @@ import ProductLinsting from "../features/ProductListing";
 
 class HomePage extends Component {
     state={
-        selectedOption: null,
+        typeOption: null,
+        categoryOption: null,
+        companyOption: null,
         company:"",
-        cart:[],
+        products:[],
         categories:[],
-        companies:[]
+        companies:[],
+        types:[]
     }
     componentDidMount = ()=>{
         axios.get("api/displayitems").then(response=>{
-            // console.log(response.data)
-
             const categories = [];
             const companies = [];
-
+            const types = [];
             response.data.forEach(res => {
                 categories.push({
                     label: res.category,
@@ -29,75 +30,89 @@ class HomePage extends Component {
                     label: res.company,
                     value:res.company
                 });
+                types.push({
+                    label: res.type,
+                    value:res.type
+                });
             });
 
             categories.reduceRight((acc, obj, i) => {
                 acc[obj.label]? categories.splice(i, 1) : acc[obj.label] = true;
                 return acc;
-              }, Object.create(null));
+            }, Object.create(null));
 
-              companies.reduceRight((acc, obj, i) => {
-                acc[obj.label]? companies.splice(i, 1) : acc[obj.label] = true;
+            companies.reduceRight((acc, obj, i) => {
+            acc[obj.label]? companies.splice(i, 1) : acc[obj.label] = true;
+            return acc;
+            }, Object.create(null));
+
+            types.reduceRight((acc, obj, i) => {
+                acc[obj.label]? types.splice(i, 1) : acc[obj.label] = true;
                 return acc;
-              }, Object.create(null));
+            }, Object.create(null));
 
             this.setState(
                 {
-                    cart: response.data.sort(function() { return 0.5 - Math.random() }),
+                    products: response.data.sort(function() { return 0.5 - Math.random() }),
                     categories: categories,
-                    companies: companies
+                    companies: companies,
+                    types: types
                 }
             )
-            console.log("=========================")
-            console.log(this.state)
-            // console.log(this.state.company)    
+            console.log(this.state)   
         })
     }
 
-    handleCompanyChange = (selectedOption) => {
-        this.setState({ selectedOption});
-        console.log(selectedOption.value);
-
-         axios.get('api/displaystoreitems', {
+    // ================Shop By type =========================
+    handleTypeChange = (typeOption) => {
+        this.setState({ selectedOption: typeOption});
+        axios.get('api/displaytypeitems/', {
             params: {
-              selected: selectedOption.value
+              type: typeOption.value
             }
           })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
+          .then(response => {
+            this.setState({products: response.data})
+          }).catch(err => {
+            console.log(`Error: ${err}`)
           });
     }
-    
-    handleCategoryChange = (selectedOption) => {
-        this.setState({ selectedOption});
-        console.log(selectedOption.value);
+
+    // =============== Visite specific Store ================
+    handleCompanyChange = (companyOption) => {
+        this.setState({ selectedOption:companyOption});
+        axios.get('api/displaystoreitems/', {
+            params: {
+              company: companyOption.value
+            }
+          })
+          .then(response => {
+            this.setState({products: response.data})
+          }).catch(err => {
+            console.log(`Error: ${err}`)
+          });
+    }
+    // =============== Shop by Category ================    
+    handleCategoryChange = (categoryOption) => {
+        this.setState({ selectedOption: categoryOption});
+        console.log(categoryOption.value);
+        axios.get('api/displaycategoryitems/', {
+            params: {
+              category: categoryOption.value
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            this.setState({products: response.data})
+          }).catch(err => {
+            console.log(`Error: ${err}`)
+          });
          
     }
 
-    displayComoanyArticles = event => {
-        event.preventDefault();
-        // console.log(event.target.value)
-        // console.log(event.target.getAttribute('data-attribute'))
-        // this.setState({ company: event.target.getAttribute('data-attribute') });
-        // var name = "TayConnection"
-
-        // axios.get("api/displaystoreitems",
-        // {
-        //     params: {
-        //       name: name
-        //     }
-        // }).then(response=>{
-        //     console.log(response)
-        // }).catch(err=>{
-        //     console.log(`Error: ${err}`)
-        // })
-      
-        
-    }
-
+    // filtrerProdicts = () => {
+  
+    // }
 
     render(){
         return(
@@ -105,17 +120,26 @@ class HomePage extends Component {
                 <Cell col={2}>
                     <div className="asside">
                         <hr/>
+                        <h5>Shop by type</h5>
+                        <Select
+                            placeholder={"Search Item"}
+                            value={this.state.typeOption}
+                            onChange={this.handleTypeChange}
+                            options={this.state.types}
+                        />
+                        <hr/>
                         <h5>Shop By Categories</h5>
                         <Select
-                            value={this.state.selectedOption}
+                            placeholder={"Search by category"}
+                            value={this.state.categoryOption}
                             onChange={this.handleCategoryChange}
                             options={this.state.categories}
                         />
                         <hr/>
                         <h5>Select company</h5>
-                        
                         <Select
-                            value={this.state.selectedOption}
+                             placeholder={"Select by Company"}
+                            value={this.state.companyOption}
                             onChange={this.handleCompanyChange}
                             options={this.state.companies}
                         />
@@ -126,7 +150,7 @@ class HomePage extends Component {
                         <Cell col={12}>
                             <div className="product-wrapper">
                                 <ProductLinsting 
-                                    products ={this.state.cart}
+                                    products ={this.state.products}
                                     displayComoanyArticles={this.displayComoanyArticles}
                                 />
                             </div>

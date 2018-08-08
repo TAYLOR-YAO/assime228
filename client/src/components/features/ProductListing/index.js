@@ -18,6 +18,8 @@ function ProductListing(props){
                 name={product.name}
                 price={product.price.$numberDecimal}
                 details={product.details}
+                storeColor={product.storeColor}
+                textColor={product.textColor}
                 />
             </div>
             )
