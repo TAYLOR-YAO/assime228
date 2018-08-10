@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import "./Receiving.css";
+import "./Receiving.css";    
+import UserNavbar from "../../Admin/AdminNavBar";
 import {Grid, Cell, Textfield,Button} from "react-mdl";
 import axios from "axios";
 class Receiving extends Component {
@@ -37,6 +38,8 @@ class Receiving extends Component {
 
     render () {
     return(
+        <div>
+        <UserNavbar/>
     <div className="marchandises-box" style={{width: '80%', margin: 'auto'}}>
         <div style={{textAlign:"center"}}><h3>Add Inventory</h3></div>
         <Grid className="demo-grid-1">
@@ -192,6 +195,7 @@ class Receiving extends Component {
         </Grid>
         <Button raised style={{background:"maroon", color:"#fff"}} onClick={this.handleSignUpSubmit}>Submit</Button>
             
+    </div>
     </div>
     )
     }

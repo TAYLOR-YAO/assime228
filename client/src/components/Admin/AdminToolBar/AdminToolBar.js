@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+
 import {NavLink} from "react-router-dom";
-import "./Navbar.css";
-import ToggleDrawer from "./ToggleDrawer";
+import "./AdminToolBar.css";
+import AdminToggleDrawer from "./AdminToggleDrawer";
 import UserProfile from "./UserProfile";
 
-// import {sum} from "../CartSum/CartSum";
-// console.log(sum())
 
 
-class Navbar extends Component {
+class AdminToolBar extends Component {
   constructor(props){
     super(props)
   
@@ -17,27 +15,8 @@ class Navbar extends Component {
   this.state = {
     isSignedIn: false,
     cartTotal:"",
-    deduxCart: this.props.cart
-  
   }
 }
-  componentDidMount = () =>{
-    console.log(this.state.deduxCart)
-      const allCartsTotal = [];
-      if(Array.isArray(this.state.deduxCart) || this.state.deduxCart.length){
-
-        this.state.deduxCart.forEach(item => {
-        const itemTotal = item.quantity * item.price.$numberDecimal
-        allCartsTotal.push(itemTotal)
-      });
-      const totalSum = allCartsTotal.reduce((a, b) => a + b, 0)
-      // console.log(totalSum)
-      this.setState({
-        cartTotal:totalSum.toFixed(2)
-      })
-    }
-
-  }
   render() {
     return (
       <header className="toolBar">
@@ -52,7 +31,6 @@ class Navbar extends Component {
               </li>
               <li>
                 <div>
-                  
                    <UserProfile/>
                 </div>
               </li>
@@ -73,7 +51,7 @@ class Navbar extends Component {
             </ul>
           </div> 
           <div className="toolBar-toggle-button">
-            <ToggleDrawer click={this.props.drawerClickHandler}/>
+            <AdminToggleDrawer click={this.props.drawerClickHandler}/>
           </div>
         </nav>
         
@@ -81,23 +59,4 @@ class Navbar extends Component {
     )
   }
 }
-
-
-function mapStateToProps(state){
-  return{
-      cart:state.cart
-  }
-}
-
-
-function mapDispatchToProps(dispatch){
-  return{
-    getAllCarts:(item) =>{
-          dispatch({type: "GET_All_CARTS", payload:item})
-      }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
-
-
-// export default  Navbar;
+export default AdminToolBar;

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import {Row, Col} from "react-bootstrap";
 import Select from 'react-select';
+import AdminNavBar from "../../Admin/AdminNavBar";
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "./Inventory.css";
 
@@ -72,7 +73,8 @@ class Iventory extends Component{
     }
 
     render(){
-        return(
+        return(<div>
+            <AdminNavBar/>            
             <div className="container">
                 <hr/>
                 <h5>Select company</h5>
@@ -130,6 +132,7 @@ class Iventory extends Component{
                 </Row>
                 
             </div>
+        </div>            
         )
     }
 }

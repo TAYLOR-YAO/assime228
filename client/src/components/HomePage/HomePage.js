@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import {Grid,Cell} from "react-mdl";
 import Select from 'react-select';
 import axios from "axios";
-import "./HomePage.css"
+import "./HomePage.css";
 import ProductLinsting from "../features/ProductListing";
+import UserNavbar from "../UserNavBar";
 
 class HomePage extends Component {
     state={
@@ -116,6 +117,8 @@ class HomePage extends Component {
 
     render(){
         return(
+            <div>
+                <UserNavbar/>
             <Grid className="demo-grid-1" >
                 <Cell col={2}>
                     <div className="asside">
@@ -158,6 +161,7 @@ class HomePage extends Component {
                     </Grid>
                 </Cell>
             </Grid>
+            </div>
         )
     }
 }

@@ -7,6 +7,7 @@ import TaxeFeeds from "../../../CartProducts/TaxeFeeds/TaxeFeeds";
 import EstimatedTotal from "../../../CartProducts/EstimatedTotal/EstimatedTotal";
 import ItemDetails from "../../../CartProducts/ItemDetails/ItemDetails";
 import ItemHandler from "../../../CartProducts/ItemHandler/ItemHandler";
+
 import "./Cart.css";
 
 
