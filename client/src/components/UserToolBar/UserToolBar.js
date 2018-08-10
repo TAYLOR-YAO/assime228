@@ -22,7 +22,7 @@ class UserToolBar extends Component {
   }
 }
   componentDidMount = () =>{
-    console.log(this.state.deduxCart)
+    // console.log(this.state.deduxCart)
       const allCartsTotal = [];
       if(Array.isArray(this.state.deduxCart) || this.state.deduxCart.length){
 
@@ -56,7 +56,7 @@ class UserToolBar extends Component {
                 </div>
               </li>
               <li><NavLink to="/">Home</NavLink></li>
-              <li>< NavLink to="/inventory">Cart</NavLink></li> 
+              <li>< NavLink to="/inventory">Admin</NavLink></li> 
               <li>
                 <NavLink to="/cart">
                   <div className="cart">

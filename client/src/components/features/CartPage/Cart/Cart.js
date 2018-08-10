@@ -1,36 +1,38 @@
 import React from "react";
 import {connect} from "react-redux";
 // import axios from "axios";
+import PorductName from "../../../CartProducts/PorductName";
 import Subtotal from "../../../CartProducts/Subtotal/Subtotal";
 import PickUpSavings from "../../../CartProducts/PickUpSavings/PickUpSavings";
-import TaxeFeeds from "../../../CartProducts/TaxeFeeds/TaxeFeeds";
+// import TaxeFeeds from "../../../CartProducts/TaxeFeeds/TaxeFeeds";
 import EstimatedTotal from "../../../CartProducts/EstimatedTotal/EstimatedTotal";
 import ItemDetails from "../../../CartProducts/ItemDetails/ItemDetails";
 import ItemHandler from "../../../CartProducts/ItemHandler/ItemHandler";
-
 import "./Cart.css";
+const savings = -3.85;
+const totalCartValue =[];
+let cartSum;
+
 
 
 function sort(item){
     return item.sort((a, b)=> a._id < b._id)
 }
 
-
 function Cart(props){
     if(sort(props.cart).length > 0){
 
-        console.log(sort(props.cart))
-        localStorage.setItem("store",JSON.stringify(sort(props.cart)))
+        sort(props.cart).forEach(item => {
+            totalCartValue.push(item.price.$numberDecimal * item.quantity)
+        });
+        cartSum = totalCartValue.reduce((a, b) => a + b, 0).toFixed(2);
 
-        // axios.post("api/cartitem",sort(props.cart) ).then(cart=>{
-        //     console.log(cart)
-        // }).catch(err=>{
-        //     console.log("cart Err", err)
-        // })
+        
     }
+
     
     return <div style={{textAlign:"center"}}>
-            <h4>Cartb Total</h4>
+            <h4>Cart Total: {cartSum}</h4>
             <table style={{textAlign:"left"}} className="table">
             <thead>
                 <tr>
@@ -68,7 +70,6 @@ function Cart(props){
         <div className="item-wrapper">
             {
                 sort(props.cart).map(item=><div key={item._id}>
-                    
                     <div className="item-card">
                         <div style={{textAlign:"center"}}><h5>All details</h5></div>
                         <hr/>
@@ -78,9 +79,12 @@ function Cart(props){
                             removeAllFromCart = {()=> props.removeAllFromCart(item)}
                         />
                         <hr/>
+                        <PorductName
+                        name={item.name}
+                        />
                         <Subtotal price={item.price.$numberDecimal}/>
-                        <PickUpSavings price={`${-3.85}`}/>
-                        <TaxeFeeds taxes={0.00}/>
+                        <PickUpSavings price={`${savings}`}/>
+                        {/* <TaxeFeeds taxes={0.00}/> */}
                         <hr/>
                         <EstimatedTotal 
                             price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
@@ -95,7 +99,11 @@ function Cart(props){
                 </div>
                 )
             }
+            
         </div>
+        {<div>
+            <h1> {totalCartValue}</h1>
+        </div>}
     </div>
 }
 

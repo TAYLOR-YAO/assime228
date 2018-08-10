@@ -34,19 +34,10 @@ class AdminToolBar extends Component {
                    <UserProfile/>
                 </div>
               </li>
-              <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink to="/">User Home</NavLink></li>
               <li>< NavLink to="/receiving">Receiving</NavLink></li> 
               <li>< NavLink to="/inventory">Inventory</NavLink></li> 
               <li>
-                <NavLink to="/cart">
-                  <div className="cart">
-                    <img src="http://www.oceaneagleeye.com/images/marketplace.png"
-                    alt="Shopping Cart"
-                    style={{ height: "80%", width: "70px" }}
-                    />
-                    <p style={{position:"relative", bottom:"10px", top:"0.5px"}}>Cart: {`$${this.state.cartTotal}`}</p>
-                  </div>
-                </NavLink>
               </li>
             </ul>
           </div> 
