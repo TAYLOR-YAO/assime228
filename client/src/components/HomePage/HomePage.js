@@ -59,7 +59,7 @@ class HomePage extends Component {
                     types: types
                 }
             )
-            console.log(this.state)   
+            // console.log(this.state)   
         })
     }
 

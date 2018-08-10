@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+// import axios from "axios";
 import Subtotal from "../../../CartProducts/Subtotal/Subtotal";
 import PickUpSavings from "../../../CartProducts/PickUpSavings/PickUpSavings";
 import TaxeFeeds from "../../../CartProducts/TaxeFeeds/TaxeFeeds";
@@ -15,10 +16,21 @@ function sort(item){
 
 
 function Cart(props){
+    if(sort(props.cart).length > 0){
+
+        console.log(sort(props.cart))
+        localStorage.setItem("store",JSON.stringify(sort(props.cart)))
+
+        // axios.post("api/cartitem",sort(props.cart) ).then(cart=>{
+        //     console.log(cart)
+        // }).catch(err=>{
+        //     console.log("cart Err", err)
+        // })
+    }
     
     return <div style={{textAlign:"center"}}>
-            {/* <h4>Cartb Total</h4> */}
-            {/* <table style={{textAlign:"left"}} className="table">
+            <h4>Cartb Total</h4>
+            <table style={{textAlign:"left"}} className="table">
             <thead>
                 <tr>
                 <th style={{padding:"0 10px"}}>Item</th>
@@ -51,7 +63,7 @@ function Cart(props){
                     </tr>)
                 }
             </tbody>
-        </table> */}
+        </table>
         <div className="item-wrapper">
             {
                 sort(props.cart).map(item=><div key={item._id}>
@@ -79,7 +91,8 @@ function Cart(props){
                         quantity={item.quantity}
                         />
                     </div>
-                </div>)
+                </div>
+                )
             }
         </div>
     </div>

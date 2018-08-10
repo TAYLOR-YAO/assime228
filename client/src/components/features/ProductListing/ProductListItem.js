@@ -2,16 +2,18 @@ import React from "react";
 import AddToCartBtn from "./AddToCartBtn";
 import RemoveBtn from "./RemoveBtn";
 import ItemDetails from "./ItemDetails";
+import "./ProductListItem.css";
 
 export default function ProductListItem(props){
     return<div style={{margin:"10px 10px"}} className="progucts">
         <div className="copmpany-name-wrapper" style={{background:`${props.storeColor}`, color:`${props.textColor}`}} data-attribute={props.company} name={props.company}  value={props.company} onClick={props.displayComoanyArticles}>
-            <p>Store:</p>
-            <h5>{props.company}</h5>
+            Store:
+            <p>{props.company}</p>
         </div>
 
         <div className="item-image-wrapper">
-            <img src={props.image} alt="prodict View"/>
+            <img src={props.image} alt="prodict View" className="zoom"/>
+            
         </div>
         <div className="item-infos">
             <h6>{props.name}</h6>

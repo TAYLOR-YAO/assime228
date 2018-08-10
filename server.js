@@ -1,8 +1,10 @@
+
 //  Node packages
 const express = require("express");
 const bodyParser = require("body-parser");
 const inventoryRoutes = require("./routes/inventory-routes")
 const storeRoutes = require("./routes/stores-routes");
+const cartRoutes = require("./routes/cart-routes");
 const path = require("path");
 //  =================================================
 
@@ -24,6 +26,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/assime228', ()=
 
 app.use("/api",inventoryRoutes);
 app.use("/api", storeRoutes);
+app.use("/api", cartRoutes);
+
 
 app.get("*", (req, res)=>{
     res.sendFile(path.join(__dirname, "client/build/index.html"));

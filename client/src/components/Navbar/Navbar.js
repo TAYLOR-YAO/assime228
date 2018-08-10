@@ -1,16 +1,43 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {NavLink} from "react-router-dom";
 import "./Navbar.css";
 import ToggleDrawer from "./ToggleDrawer";
 import UserProfile from "./UserProfile";
 
-class Navbar extends Component {
+// import {sum} from "../CartSum/CartSum";
+// console.log(sum())
 
-  state = {
+
+class Navbar extends Component {
+  constructor(props){
+    super(props)
+  
+
+  this.state = {
     isSignedIn: false,
+    cartTotal:"",
+    deduxCart: this.props.cart
   
   }
- 
+}
+  componentDidMount = () =>{
+    console.log(this.state.deduxCart)
+      const allCartsTotal = [];
+      if(Array.isArray(this.state.deduxCart) || this.state.deduxCart.length){
+
+        this.state.deduxCart.forEach(item => {
+        const itemTotal = item.quantity * item.price.$numberDecimal
+        allCartsTotal.push(itemTotal)
+      });
+      const totalSum = allCartsTotal.reduce((a, b) => a + b, 0)
+      // console.log(totalSum)
+      this.setState({
+        cartTotal:totalSum.toFixed(2)
+      })
+    }
+
+  }
   render() {
     return (
       <header className="toolBar">
@@ -39,7 +66,7 @@ class Navbar extends Component {
                     alt="Shopping Cart"
                     style={{ height: "80%", width: "70px" }}
                     />
-                    <p style={{position:"relative", bottom:"10px", left:"20px"}}>Cart</p>
+                    <p style={{position:"relative", bottom:"10px", top:"0.5px"}}>Cart: {`$${this.state.cartTotal}`}</p>
                   </div>
                 </NavLink>
               </li>
@@ -55,4 +82,22 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+
+function mapStateToProps(state){
+  return{
+      cart:state.cart
+  }
+}
+
+
+function mapDispatchToProps(dispatch){
+  return{
+    getAllCarts:(item) =>{
+          dispatch({type: "GET_All_CARTS", payload:item})
+      }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+
+
+// export default  Navbar;
