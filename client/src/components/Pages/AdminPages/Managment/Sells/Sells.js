@@ -38,15 +38,23 @@ class Sells extends Component{
             response.data.map(item=>
                 ordersValue.push(item.quantity * item.price.$numberDecimal)
             )
-            this.setState(
-                {
-                    orders: response.data,
-                    companies: companies,
-                    productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
-                }
-            )
+
+                this.interval = setInterval(() => 
+                this.setState(
+                    {
+                        orders: response.data,
+                        companies: companies,
+                        productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
+                    }
+                ), 100);
+      
+            
         });
         
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     handleCompanyChange = (companyOption) => {
