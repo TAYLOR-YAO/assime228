@@ -1,0 +1,117 @@
+
+.toolBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(-70deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%), url('https://vignette.wikia.nocookie.net/clubpenguin/images/2/25/Medieval_Party_Background.png/revision/latest?cb=20130919222138');
+    background-repeat: no-repeat;
+    background-size: 100% 100px;
+    color: #333;
+    z-index: 100;
+
+}
+.toolBar-logo a{
+    color: #fff;
+    font-size:3rem; 
+    text-decoration: none;
+    margin-left: 50px;
+}
+.usernameLayout{
+    position: relative;
+    left: 350px;
+}
+.usernameLayout a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.spacer{
+    flex: 0.5;
+}
+.toolBar-navigation{
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+}
+.toolBar-links{
+    color: #fff;
+    padding-right: 50px;
+}
+.toolBar-links ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    
+}
+.toolBar-links li{
+    padding: 0 0.5rem;
+}
+.toolBar-links li:hover{
+    background: #333;
+    border-radius: 5px;
+}
+.toolBar-links a{
+    color: #fff;
+    text-decoration: none;
+}
+.toolBar-links a:host,
+.toolBar-links a:active{
+    color: #fff;
+}
+.cart{
+    height: 80px;
+}
+
+@media (max-width: 1024px){
+    .toolBar{
+   
+        background: linear-gradient(-70deg, #fa7c30 40%, rgba(0, 0, 0, 0) 30%), url('https://vignette.wikia.nocookie.net/clubpenguin/images/2/25/Medieval_Party_Background.png/revision/latest?cb=20130919222138');
+        background-repeat: no-repeat;
+        background-size: 100% 100px;
+        z-index: 100;
+    
+    }
+    .usernameLayout{
+        left: -10px;
+        margin-left: 90px;
+        
+    }
+}
+
+@media (max-width: 768px){
+    .toolBar-links ul{
+        display: none;
+    }
+}
+
+
+
+@media (min-width: 769px){
+    .toolBar-toggle-button{
+        display: none;
+    }
+    .toolBar-logo{
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 769px){
+    .usernameLayout{
+       display: none;
+    }
+  }
+
+@media (max-width: 425px){
+    .usernameLayout{
+       display: none;
+    }
+  }
+
+@media (max-width: 375px){
+  .toolBar-logo a{
+      font-size: 2.5rem;
+  }
+}

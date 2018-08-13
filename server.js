@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const inventoryRoutes = require("./routes/inventory-routes")
 const storeRoutes = require("./routes/stores-routes");
 const cartRoutes = require("./routes/cart-routes");
+const userRoutes = require("./routes/user-routes");
+const sellsRoutes = require("./routes/sells-routes");
+
+
 const path = require("path");
 //  =================================================
 
@@ -27,6 +31,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/assime228', ()=
 app.use("/api",inventoryRoutes);
 app.use("/api", storeRoutes);
 app.use("/api", cartRoutes);
+app.use("/api", userRoutes);
+app.use("/api", sellsRoutes);
+
 
 
 app.get("*", (req, res)=>{

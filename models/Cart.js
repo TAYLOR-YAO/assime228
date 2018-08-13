@@ -11,12 +11,20 @@ const CartSchema = new Schema({
         type:String,
         required:true
     },
+    storeId:{
+        type:String,
+        required:true
+    },
     price:{
         type: Schema.Types.Decimal128,
         required:true
     },
     quantity:{
         type:Number,
+        required:true
+    },
+    customerID:{
+        type: String,
         required:true
     },
     both:{
@@ -36,6 +44,10 @@ const CartSchema = new Schema({
         required:true
     },
     brand:{
+        type:String,
+        require:true
+    },
+    type:{
         type:String,
         require:true
     },

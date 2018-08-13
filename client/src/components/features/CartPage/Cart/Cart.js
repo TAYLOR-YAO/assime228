@@ -1,75 +1,89 @@
 import React from "react";
 import {connect} from "react-redux";
-// import axios from "axios";
-import PorductName from "../../../CartProducts/PorductName";
-import Subtotal from "../../../CartProducts/Subtotal/Subtotal";
-import PickUpSavings from "../../../CartProducts/PickUpSavings/PickUpSavings";
-// import TaxeFeeds from "../../../CartProducts/TaxeFeeds/TaxeFeeds";
-import EstimatedTotal from "../../../CartProducts/EstimatedTotal/EstimatedTotal";
-import ItemDetails from "../../../CartProducts/ItemDetails/ItemDetails";
-import ItemHandler from "../../../CartProducts/ItemHandler/ItemHandler";
+import axios from "axios";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import Checkout from "../../Checkout";
+import PorductName from "../CartProducts/PorductName";
+import Subtotal from "../CartProducts/Subtotal/Subtotal";
+import PickUpSavings from "../CartProducts/PickUpSavings/PickUpSavings";
+import EstimatedTotal from "../CartProducts/EstimatedTotal/EstimatedTotal";
+import ItemDetails from "../CartProducts/ItemDetails/ItemDetails";
+import ItemHandler from "../CartProducts/ItemHandler/ItemHandler";
+import TableView from './TableView/TableView';
 import "./Cart.css";
 const savings = -3.85;
-const totalCartValue =[];
+const defaultSum = 0;
 let cartSum;
 
-
-
-function sort(item){
+function sortItemInCart(item){
     return item.sort((a, b)=> a._id < b._id)
 }
-
+function currentUser(){
+    let userId = localStorage.getItem("currentUserId");
+    return userId
+}
 function Cart(props){
-    if(sort(props.cart).length > 0){
+    const order = props.cart.map(item=> {
+        item.customerID = currentUser();
+        return item
+    })
+    axios.post("api/order", order).then(response=>{
+    });
 
-        sort(props.cart).forEach(item => {
-            totalCartValue.push(item.price.$numberDecimal * item.quantity)
-        });
-        cartSum = totalCartValue.reduce((a, b) => a + b, 0).toFixed(2);
-
-        
+    if(Array.isArray(props.cart) || props.cart.length){
+        cartSum = props.cart.map(item=>{
+            return item.price.$numberDecimal * item.quantity
+        }).reduce((a, b) => a + b, 0).toFixed(2); 
+    } else {
+        cartSum = defaultSum.toFixed(2)
     }
-
-    
     return <div style={{textAlign:"center"}}>
-            <h4>Cart Total: {cartSum}</h4>
-            <table style={{textAlign:"left"}} className="table">
-            <thead>
-                <tr>
-                <th style={{padding:"0 10px"}}>Item</th>
-                <th style={{padding:"0 10px"}}>Qantity</th>
-                <th style={{padding:"0 10px"}}>Company</th>
-                <th style={{padding:"0 10px"}}>Unitary price</th>
-                <th style={{padding:"0 10px"}}>Total price</th>                                         
-                <th style={{padding:"0 10px"}}>Add qty</th>
-                <th style={{padding:"0 10px"}}>Reduce qty</th>
-                <th style={{padding:"0 10px"}}>Remove All</th>                                                                                                                                                               
-                </tr>
-            </thead>
-            <tbody className=" table-body">
-                {
-                    sort(props.cart).map(item=><tr key={item._id} className="table-body-row">
-                        <td style={{padding:"0 10px"}}>{item.name}</td>
-                        <td style={{padding:"0 10px"}}>{item.quantity}</td>
-                        <td style={{padding:"0 10px"}}>{item.company}</td>
-                        <td style={{padding:"0 10px"}}>${item.price.$numberDecimal}</td>
-                        <td style={{padding:"0 10px"}}>${item.price.$numberDecimal * item.quantity}</td>                                                            
-                        <td style={{padding:"0 10px"}}>
+            <h4>Cart Total: {`$${cartSum}`}</h4>
+            <Checkout/>
+            <TableView
+                tableView ={
+                    <div className="table-data">
+                    <Table>
+                    <Thead>
+                        <Tr>
+                        <Th style={{padding:"0 10px"}}>Item</Th>
+                        <Th style={{padding:"0 10px"}}>Qantity</Th>
+                        <Th style={{padding:"0 10px"}}>Company</Th>
+                        <Th style={{padding:"0 10px"}}>Unitary price</Th>
+                        <Th style={{padding:"0 10px"}}>Total price</Th>                                         
+                        <Th style={{padding:"0 10px"}}>Add qty</Th>
+                        <Th style={{padding:"0 10px"}}>Reduce qty</Th>
+                        <Th style={{padding:"0 10px"}}>Remove All</Th>                                                                                                                                                               
+                        </Tr>
+                    </Thead>
+                    <Tbody className="item-card">
+                    { sortItemInCart(props.cart).map(item=>(
+                        <Tr key={item._id} className="table-body-row">
+                        <Td style={{padding:"0 10px"}}>{item.name}</Td>
+                        <Td style={{padding:"0 10px"}}>{item.quantity}</Td>
+                        <Td style={{padding:"0 10px"}}>{item.company}</Td>
+                        <Td style={{padding:"0 10px"}}>${item.price.$numberDecimal}</Td>
+                        <Td style={{padding:"0 10px"}}>${item.price.$numberDecimal * item.quantity}</Td>                                                            
+                        <Td style={{padding:"0 10px"}}>
                             <button onClick={()=> props.addToCart(item)}>+</button>
-                        </td>
-                        <td style={{padding:"0 10px"}}>
+                        </Td>
+                        <Td style={{padding:"0 10px"}}>
                             <button onClick={()=> props.removeFromCart(item)}>-</button>
-                        </td>
-                        <td style={{padding:"0 10px"}}>
+                        </Td>
+                        <Td style={{padding:"0 10px"}}>
                         <button onClick={()=> props.removeAllFromCart(item)}>All</button>
-                        </td>                    
-                    </tr>)
+                        </Td>                    
+                    </Tr>
+                    ))
+                    }
+                    </Tbody>
+                </Table>
+                </div>
                 }
-            </tbody>
-        </table>
+            />
         <div className="item-wrapper">
             {
-                sort(props.cart).map(item=><div key={item._id}>
+                sortItemInCart(props.cart).map(item=><div key={item._id}>
                     <div className="item-card">
                         <div style={{textAlign:"center"}}><h5>All details</h5></div>
                         <hr/>
@@ -84,7 +98,6 @@ function Cart(props){
                         />
                         <Subtotal price={item.price.$numberDecimal}/>
                         <PickUpSavings price={`${savings}`}/>
-                        {/* <TaxeFeeds taxes={0.00}/> */}
                         <hr/>
                         <EstimatedTotal 
                             price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
@@ -99,11 +112,7 @@ function Cart(props){
                 </div>
                 )
             }
-            
         </div>
-        {<div>
-            <h1> {totalCartValue}</h1>
-        </div>}
     </div>
 }
 
@@ -112,8 +121,6 @@ function mapStateToProps(state){
         cart:state.cart
     }
 }
-
-
 function mapDispatchToProps(dispatch){
     return{
         addToCart:(item) =>{
@@ -127,4 +134,4 @@ function mapDispatchToProps(dispatch){
         }
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

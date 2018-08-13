@@ -10,10 +10,8 @@ export default function ProductListItem(props){
             Store:
             <p>{props.company}</p>
         </div>
-
         <div className="item-image-wrapper">
-            <img src={props.image} alt="prodict View" className="zoom"/>
-            
+            <img src={props.image} alt="prodict View" className="zoom"/> 
         </div>
         <div className="item-infos">
             <h6>{props.name}</h6>
@@ -40,8 +38,6 @@ export default function ProductListItem(props){
                 />
                 : null
             }
-            
-            
         </div>
     </div>
 

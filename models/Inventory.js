@@ -11,6 +11,10 @@ const InventorySchema = new Schema({
         type:String,
         required:true
     },
+    storeId:{
+        type:String,
+        required:true
+    },
     type:{
         type:String,
         required:true

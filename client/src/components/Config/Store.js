@@ -1,6 +1,6 @@
 
 import {createStore, combineReducers} from "redux";
-import CartReducer from "../features/CartPage/CartReducer";
+import CartReducer from "./CartReducer";
 
 function saveToLocatStorage(state){
     try {

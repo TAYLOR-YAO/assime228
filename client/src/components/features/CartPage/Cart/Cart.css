@@ -51,6 +51,7 @@ tr:hover{
 }
 .item-card{
     width: 300px;
+    background: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 1em;
     text-align: left;
@@ -60,3 +61,23 @@ tr:hover{
   .product-card> .show-Grid{
       padding-bottom: 1.5em
   }
+
+
+  @media only screen and (max-width: 425px) {
+    .table-data{
+        margin-left: -20px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .table-data{
+        margin-left: -50px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .table-data{
+        margin-left: -70px;
+    }
+    .item-card{
+        left: 20px;
+    }
+}

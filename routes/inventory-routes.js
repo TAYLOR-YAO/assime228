@@ -5,9 +5,7 @@ const router = express.Router();
 
 
 router.post("/addinventory", (req, res)=>{
-    // console.log(req.body)
     db.Inventory.create(req.body).then(items=>{
-        // console.log(items)
         res.json(items)
     })
     .catch(function(err) {
@@ -17,9 +15,7 @@ router.post("/addinventory", (req, res)=>{
 });
 
 router.get("/displayitems", (req, res)=>{
-    // console.log(req.body)
     db.Inventory.find({}).then(items=>{
-        // console.log(items)
         res.json(items)
     })
     .catch(function(err) {
@@ -28,11 +24,8 @@ router.get("/displayitems", (req, res)=>{
 
 });
 
-
 router.get("/products", (req, res)=>{
-    // console.log(req.body)
     db.Inventory.find({}).then(products=>{
-        // console.log(items)
         res.json(products)
     })
     .catch(function(err) {
@@ -41,7 +34,16 @@ router.get("/products", (req, res)=>{
 
 });
 
-
-
+router.post("/updateinventory", (req, res)=>{
+    db.Inventory.findById(req.body._id, (err, item) => {
+        if (err) return handleError(err);
+        item.both = item.both - req.body.quantity;
+        item.save((err, updatedItem) => {
+            if (err) return handleError(err);
+            res.send(updatedItem.both)
+    
+        });
+    });
+});
 
 module.exports = router;
