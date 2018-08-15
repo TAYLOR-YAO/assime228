@@ -20,6 +20,7 @@ class HomePage extends Component {
     
     componentDidMount = ()=>{
         axios.get("api/displayitems").then(response=>{
+            this.setState({generalProducts: response.data})
             const categories = [];
             const companies = [];
             const types = [];
@@ -56,7 +57,6 @@ class HomePage extends Component {
             this.setState(
                 {
                     products: response.data.sort(function() { return 0.5 - Math.random() }),
-                    generalProducts: response.data,
                     categories: categories,
                     companies: companies,
                     types: types
