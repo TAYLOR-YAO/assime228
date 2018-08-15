@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import firebase from "firebase";
 import initialized from "../../../Privates/FirebaseAuth";
 import Cart from "../../../features/CartPage/Cart";
-import UserNavbar from "../UserNavBar";
+import UserNavbar from "../UserToolBar";
 import Login from "../Login/Login";
 
 class CartPage extends Component {
@@ -22,12 +22,11 @@ class CartPage extends Component {
     authantification =()=>{
         firebase.auth().onAuthStateChanged(user=>{
             this.setState({isSignedIn:!!user});
-            console.log("USER>>>:", user)
         })
     }
 
     render(){
-        return  (<div>   
+        return  (<div style={{marginBottom:"100px"}}>   
                 {this.state.isSignedIn ? <div style={{position:"relative", top:"100px"}}>
                         <UserNavbar/>
                         <div style={{width: '80%', margin: 'auto'}}>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./Receiving.css";    
-import UserNavbar from "../../AdminHeader/AdminNavBar";
+import AdminNavbar from "../../AdminToolBar";
 import {Grid, Cell, Textfield,Button} from "react-mdl";
 import axios from "axios";
 class Receiving extends Component {
@@ -35,12 +35,10 @@ class Receiving extends Component {
         }); 
     }
 
-
-
     render () {
     return(
-        <div>
-        <UserNavbar/>
+        <div style={{marginTop:"100px"}}>
+        <AdminNavbar/>
     <div className="marchandises-box" style={{width: '80%', margin: 'auto'}}>
         <div style={{textAlign:"center"}}><h3>Add Inventory</h3></div>
         <Grid className="demo-grid-1">

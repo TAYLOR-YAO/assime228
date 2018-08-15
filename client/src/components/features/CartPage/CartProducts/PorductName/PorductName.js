@@ -9,7 +9,7 @@ import "./PorductName.css";
 return <div>
         <Navbar.Header>
             <Navbar.Brand>
-            <div>{props.name}</div>
+            <div style={{textAlign:"center"}}>{props.name}</div>
             </Navbar.Brand>
         </Navbar.Header>
     </div>

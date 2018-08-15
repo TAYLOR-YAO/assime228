@@ -14,8 +14,7 @@ const Router =()=>(
         <Route exact path="/receiving" component={Receiving}/>
         <Route exact path="/inventory" component={Iventory}/>
         <Route exact path="/orders" component={OrderReview}/>
-        <Route exact path="/sells" component={Sells}/>       
-
+        <Route exact path="/sells" component={Sells}/>                    
     </Switch>
 )
 

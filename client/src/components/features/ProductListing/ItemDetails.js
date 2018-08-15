@@ -1,5 +1,6 @@
 import React, {Component } from "react";
 import {Button,  Collapse, Well, Panel} from "react-bootstrap";
+import "./ItemDetails.css";
 export default class ItemDetails extends Component{
     constructor(props){
         super(props);
@@ -10,7 +11,7 @@ export default class ItemDetails extends Component{
     
     render(){
         return(
-            <div style={{marginTop:"-15px"}}>
+            <div className="itemDetailsWell">
                 <Button
                     className="item-details-button"
                     bsStyle="link"

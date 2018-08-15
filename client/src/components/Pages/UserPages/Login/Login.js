@@ -5,10 +5,6 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import initialized from "../../../Privates/FirebaseAuth";
 import HomePage from "../HomePages";
 import "./Login.css";
-import Background from '../../../Images/giphy.gif';
-const modalStyle = {
-    backgroundImage: "url(" + { Background } + ")"
-  };
 
 class Login extends Component {
     state={isSignedIn:false}

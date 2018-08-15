@@ -1,14 +1,14 @@
 import React ,{Component} from "react";
-import {ButtonGroup, Button} from "react-bootstrap";
 
 export default class ItemHandler extends Component {
     render(){
         return(
-            <ButtonGroup justified>
-                <Button href="#" onClick={this.props.addToCart}>+</Button>
-                <Button href="#" onClick={this.props.removeFromCart}>-</Button>
-                <Button href="#" onClick={this.props.removeAllFromCart}>Remove all</Button>
-            </ButtonGroup>
+            <div >
+                <button style={{width:"60px"}} onClick={this.props.addToCart}>+</button>
+                <button style={{width:"60px"}} onClick={this.props.removeFromCart}>-</button>
+                <button style={{width:"60px"}} onClick={this.props.removeAllFromCart}>all</button>
+                
+            </div>
         )
     }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import {Row, Col} from "react-bootstrap";
 import Select from 'react-select';
-import AdminNavBar from "../../AdminHeader/AdminNavBar";
+import AdminNavbar from "../../AdminToolBar";
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "./Sells.css";
 
@@ -39,23 +39,20 @@ class Sells extends Component{
                 ordersValue.push(item.quantity * item.price.$numberDecimal)
             )
 
-                this.interval = setInterval(() => 
-                this.setState(
-                    {
-                        orders: response.data,
-                        companies: companies,
-                        productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
-                    }
-                ), 100);
-      
-            
-        });
-        
+            this.interval = setInterval(() => 
+            this.setState(
+                {
+                    orders: response.data,
+                    companies: companies,
+                    productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
+                }
+            ), 100);
+        });  
     }
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
 
     handleCompanyChange = (companyOption) => {
         this.setState({ 
@@ -83,7 +80,7 @@ class Sells extends Component{
 
     render(){
         return(<div>
-            <AdminNavBar/>
+            <AdminNavbar/>
             <div style={{textAlign:"center"}}><h3>Items sold</h3> </div>
             <div className="container">
                 <h5>{`All Sols By ${this.state.generalInventory}`}</h5>

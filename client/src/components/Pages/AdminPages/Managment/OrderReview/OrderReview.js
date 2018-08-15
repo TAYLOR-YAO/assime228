@@ -3,7 +3,7 @@ import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import {Row, Col} from "react-bootstrap";
 import Select from 'react-select';
-import AdminNavBar from "../../AdminHeader/AdminNavBar";
+import AdminNavbar from "../../AdminToolBar";
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "./OrderReview.css";
 
@@ -51,9 +51,9 @@ class OrderReview extends Component{
         });
         
     }
-    componentWillUnmount() {
-        clearInterval(this.interval);
-      }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    //   }
 
     handleCompanyChange = (companyOption) => {
         this.setState({ 
@@ -90,7 +90,7 @@ class OrderReview extends Component{
 
     render(){
         return(<div>
-            <AdminNavBar/>
+            <AdminNavbar/>
             <div style={{textAlign:"center"}}><h3>Order Review</h3> </div>
             <div className="container">
                 <h5>{`All orders from ${this.state.generalInventory}`}</h5>

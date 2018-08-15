@@ -85,7 +85,40 @@ function Cart(props){
             {
                 sortItemInCart(props.cart).map(item=><div key={item._id}>
                     <div className="item-card">
-                        <div style={{textAlign:"center"}}><h5>All details</h5></div>
+                        <div className="view view-cascade gradient-card-header blue-gradient">
+                            <h6 className="card-header-title mb-3">{item.company}</h6>
+                            <p className="card-header-subtitle mb-0">
+                            <ItemHandler
+                                addToCart = {()=> props.addToCart(item)}
+                                removeFromCart = {()=> props.removeFromCart(item)}
+                                removeAllFromCart = {()=> props.removeAllFromCart(item)}
+                            />
+                            </p>
+                            <PorductName
+                            name={item.name}
+                            />
+
+                        </div>
+                        <div className="card-body card-body-cascade text-center">
+                            <Subtotal price={item.price.$numberDecimal}/>
+                            <PickUpSavings price={`${savings}`}/>
+                            <ItemDetails
+                            price={item.price.$numberDecimal}
+                            image={item.image}
+                            quantity={item.quantity}
+                            />
+                            <hr/>
+                            <EstimatedTotal 
+                                price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                quantity={item.quantity}
+                            />
+                        </div>
+
+
+                    
+
+
+                        {/* <div style={{textAlign:"center"}}><h5>All details</h5></div>
                         <hr/>
                         <ItemHandler
                             addToCart = {()=> props.addToCart(item)}
@@ -107,7 +140,7 @@ function Cart(props){
                         price={item.price.$numberDecimal}
                         image={item.image}
                         quantity={item.quantity}
-                        />
+                        /> */}
                     </div>
                 </div>
                 )

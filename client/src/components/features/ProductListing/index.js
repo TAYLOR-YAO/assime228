@@ -9,34 +9,16 @@ function currentUser(){
 }
 function updateOrder(items){
     const order = items.map(item=> {
-    console.log("User Got from L.Sorage: ",currentUser()) 
-
     item.customerID = currentUser();
-
-    console.log("+++: ",item)
     return item
-    })
-    console.log("Items: :::: ",order)
+    });
     axios.post("api/order", order).then(response=>{
-        console.log("Data...: ",response.data)
+        // console.log("Data...: ",response.data)
     });
 }
-// const order = props.cart.map(item=> {
-//     console.log("User Got from L.Sorage: ",currentUser()) 
-    
-//      item.customerID = currentUser();
-
-//      console.log("+++: ",item)
-//      return item
-//  })
-//  console.log("Items: :::: ",order)
-//  axios.post("api/order", order).then(response=>{
-//      console.log("Data...: ",response.data)
-//  });
 
 function ProductListing(props){
     updateOrder(props.cart)
-    // console.log("This PROP",props.cart)
     return<div className="product-wrapper">
         {
             props.products.map(product=>
