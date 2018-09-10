@@ -37,7 +37,7 @@ function Cart(props){
         })
         axios.post("api/order", order).then(response=>{
             props.clearCarts(props.cart)
-            console.log("order is Presessed: ", response.data)
+            // console.log("order is Presessed: ", response.data)
         }).catch(err=>{
             console.log("ERR: ",err.message)
         })

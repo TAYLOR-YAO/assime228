@@ -1,9 +1,17 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import Select from 'react-select';
 import axios from "axios";
 import "./HomePage.css";
 import ProductLinsting from "../../../features/ProductListing";
-// import UserNavbar from "../UserToolBar";
+import Checkout from "../../../features/Checkout";
+
+function currentUser(){
+    let userId = localStorage.getItem("currentUserId");
+    return userId
+}
+
+
 
 class HomePage extends Component {
     state={
@@ -18,9 +26,22 @@ class HomePage extends Component {
         types:[]
     }
     
+     processOrder = event =>{
+        const order = this.props.cart.map(item=> {
+            item.customerID = currentUser();
+            return item
+        })
+        axios.post("api/order", order).then(response=>{
+            this.props.clearCarts(this.props.cart)
+            console.log("order is Presessed: ", response.data)
+        }).catch(err=>{
+            console.log("ERR: ",err.message)
+        })
+    }
+
      componentDidMount (){
+         console.log(this.props.cart)
         axios.get("api/displayitems").then(response=>{
-            // this.setState({generalProducts: response.data})
             const categories = [];
             const companies = [];
             const types = [];
@@ -101,35 +122,40 @@ class HomePage extends Component {
         <div style={{marginTop:"100px"}}>
 
                 <div id="main">
-                    <aside>
-                        <div>
-                            <p style={{position:"relative", top:"10px"}}>Shop by type</p>
-                            <Select
-                                placeholder={"Search Item"}
-                                value={this.state.typeOption}
-                                onChange={this.handleTypeChange}
-                                options={this.state.types}
-                            />
+                    <aside style={{textAlign:"center"}}>
+                        <div onClick={this.processOrder}>
+                            <Checkout/>
                         </div>
-                        <div>
-                            <p style={{position:"relative", top:"10px"}}>Shop By Categories</p>
-                            <Select
-                                placeholder={"Search by category"}
-                                value={this.state.categoryOption}
-                                onChange={this.handleCategoryChange}
-                                options={this.state.categories}
-                            />
+                       
+                        <div className="dearchBar">
+                            <div>
+                                <p style={{position:"relative", top:"10px"}}>Shop by type</p>
+                                <Select
+                                    placeholder={"Search Item"}
+                                    value={this.state.typeOption}
+                                    onChange={this.handleTypeChange}
+                                    options={this.state.types}
+                                />
+                            </div>
+                            <div>
+                                <p style={{position:"relative", top:"10px"}}>Shop By Categories</p>
+                                <Select
+                                    placeholder={"Search by category"}
+                                    value={this.state.categoryOption}
+                                    onChange={this.handleCategoryChange}
+                                    options={this.state.categories}
+                                />
+                            </div>
+                            <div>
+                            <p style={{position:"relative", top:"10px"}}>Select company</p>
+                                <Select
+                                    placeholder={"Select by Company"}
+                                    value={this.state.companyOption}
+                                    onChange={this.handleCompanyChange}
+                                    options={this.state.companies}
+                                />
+                            </div>
                         </div>
-                        <div>
-                        <p style={{position:"relative", top:"10px"}}>Select company</p>
-                            <Select
-                                placeholder={"Select by Company"}
-                                value={this.state.companyOption}
-                                onChange={this.handleCompanyChange}
-                                options={this.state.companies}
-                            />
-                        </div>
-                        
                     </aside>
                     <article>
                     <ProductLinsting 
@@ -146,6 +172,18 @@ class HomePage extends Component {
         )
     }
 }
-export default HomePage;
+function mapStateToProps(state){
+    return{
+        cart:state.cart
+    }
+}
+function mapDispatchToProps(dispatch){
+    return{
+        clearCarts:(item) =>{
+            dispatch({type: "CLEAR_CARTS"})
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 
