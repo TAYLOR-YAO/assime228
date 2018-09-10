@@ -21,7 +21,6 @@ class Receiving extends Component {
         image: null,
         price:  "",
         both:   "",
-        sku:    "",
         details:    "",
         category:   "",
         brand:  "",
@@ -48,14 +47,10 @@ class Receiving extends Component {
 
     handleImageChange = event => {
         event.preventDefault();        
-        console.log(event.target.files[0])
-        // const fd = new FormData();
-
 
         this.setState({
           image: URL.createObjectURL(event.target.files[0])
         });
-        console.log(this.state.image)
     }
 
     handleInputsChanges = event => {
@@ -65,10 +60,10 @@ class Receiving extends Component {
 
     handleSignUpSubmit = event => {
         event.preventDefault();
-        console.log(this.state)
         axios.post("api/addinventory",this.state).then(items=>{
-            console.log(items)
-        }); 
+        }).catch(err=>{
+            console.log(err.message)
+        });
     }
 
     render () {

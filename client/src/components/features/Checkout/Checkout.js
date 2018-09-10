@@ -14,7 +14,7 @@ class Trigger extends React.Component {
         sum: this.props.cart.map(item=> item.price.$numberDecimal * item.quantity).reduce((a, b) => a + b, 0).toFixed(2)
       };
     }
-    
+
     handleHide() {
       this.setState({ show: false });
     }
@@ -25,7 +25,6 @@ class Trigger extends React.Component {
             bsStyle="primary"
             bsSize="large"
             onClick={() => this.setState({ show: true })}
-            style={{background: "#6351ce"}}
           >
             Pay now
           </Button>
@@ -71,7 +70,7 @@ class Trigger extends React.Component {
                 </Row> 
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.handleHide} style={{background:"#6351ce !important"}}>Close</Button>
+              <Button onClick={this.handleHide}  bsStyle="primary" >Close</Button>
             </Modal.Footer>
           </Modal>
         </div>

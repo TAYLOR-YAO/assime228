@@ -4,9 +4,7 @@ const db = require("../models");
 const router = express.Router();
 
 router.post("/addinventory", (req, res)=>{
-    // console.log("BODY:....",req.body)
     db.Inventory.create(req.body).then(items=>{
-        // console.log("ITEMS:....",items)
         res.json(items)
     })
     .catch(function(err) {

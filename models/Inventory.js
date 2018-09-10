@@ -27,10 +27,6 @@ const InventorySchema = new Schema({
         type:String,
         default:"white"
     },
-    color:{
-        type:String,
-        required:true
-    },
     price:{
         type: Schema.Types.Decimal128,
         required:true

@@ -41,7 +41,6 @@ class Navbar extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isSignedIn: !!user,
-        userProfilePicture: user.photoURL,
         userDisplayName: user.displayName,
         userID: user.uid
 
