@@ -22,7 +22,6 @@ class CartPage extends Component {
     authantification =()=>{
         firebase.auth().onAuthStateChanged(user=>{
             this.setState({isSignedIn:!!user});
-            console.log("user", user)
         })
     }
 

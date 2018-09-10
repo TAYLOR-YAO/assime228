@@ -14,9 +14,7 @@ class Trigger extends React.Component {
         sum: this.props.cart.map(item=> item.price.$numberDecimal * item.quantity).reduce((a, b) => a + b, 0).toFixed(2)
       };
     }
-  componentDidMount = () =>{
-      console.log(this.state.sum)
-  }
+    
     handleHide() {
       this.setState({ show: false });
     }
