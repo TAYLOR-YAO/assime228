@@ -68,7 +68,7 @@ class Receiving extends Component {
             <Grid className="demo-grid-1" >
                 <Cell style={{border: "3px double #333", padding:"10px" , height:"450px", textAlign: "center"}}  col={3}>
                     <p style={{textAlign:"center"}}>Image Here</p>
-                    <img className="product-image" src={this.state.image? this.state.image : "https://qph.fs.quoracdn.net/main-qimg-7af63b8ff4c09abcb9d4e385ef111db8"} alt="product"/>
+                    <img className="product-image" src={this.state.image? this.state.image : "https://static1.squarespace.com/static/5317b571e4b01396b757268a/535ed193e4b081613fd31a34/535ed193e4b081613fd31a39/1398722779508/photo-placeholder.png"} alt="product"/>
                     <hr/>
                     <Grid className="previews">
                         <Cell col={8}>

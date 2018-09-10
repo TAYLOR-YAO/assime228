@@ -28,7 +28,7 @@ class OrderReview extends Component{
     }
 
     componentDidMount (){
-        this.interval = setInterval(() =>{
+        // this.interval = setInterval(() =>{
             axios.get(`api/orders/?storeId=${valideted()._id}`).then(response=>{      
                 const ordersValue =[]
                 response.data.map(item=>
@@ -39,12 +39,12 @@ class OrderReview extends Component{
                     productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
                 });
             });
-        });
+        // });
         
     }
-    componentWillMount (){
-        clearInterval(this.interval)
-    }
+    // componentWillMount (){
+    //     clearInterval(this.interval)
+    // }
 
     handleCheck(event) {
         event.preventDefault();
