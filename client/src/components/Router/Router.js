@@ -1,20 +1,19 @@
 import React from "react";
 import {Switch, Route} from "react-router-dom";
+import StoreRegistration from "../Pages/AdminPages/Managment/StoreRegistration";
 import Login from "../Pages/UserPages/Login";
-import Sells from "../Pages/AdminPages/Managment/Sells";
+import Home from "../Pages/UserPages/HomePages";
 import ShoppingCart from "../Pages/UserPages/ShopperCarts";
-import Receiving from "../Pages/AdminPages/Managment/Receiving";
-import Iventory from "../Pages/AdminPages/Managment/Inventory";
-import OrderReview from "../Pages/AdminPages/Managment/OrderReview";
-
+import Office from "../Pages/AdminPages/Managment/Office";
+import Checkout from "../features/Checkout";
 const Router =()=>(
     <Switch>
         <Route exact path="/" component={Login}/>
+        <Route exact path="/home" component={Home}/>
+        <Route exact path="/registration" component={StoreRegistration}/>                        
         <Route exact path="/cart" component={ShoppingCart}/>        
-        <Route exact path="/receiving" component={Receiving}/>
-        <Route exact path="/inventory" component={Iventory}/>
-        <Route exact path="/orders" component={OrderReview}/>
-        <Route exact path="/sells" component={Sells}/>                    
+        <Route exact path="/office" component={Office}/>
+        <Route exact path="/checkout" component={Checkout}/>       
     </Switch>
 )
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavLink, NavItem, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
+import {Nav,Navbar,NavItem,NavDropdown,MenuItem} from "react-bootstrap";
 import firebase from "firebase";
 import initialized from "../../../Privates/FirebaseAuth";
 import { connect } from "react-redux";
@@ -18,74 +18,51 @@ class UserToolBar extends Component {
       deduxCart: this.props.sum,
       username:firebase.auth().currentUser.displayName
     }
-    this.onClick = this.onClick.bind(this);
-    this.toggle = this.toggle.bind(this);
 }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.setState({ 
-      cartTotal: this.props.sum
-    })
+    async componentDidMount () {
+        this.interval = setInterval(() => this.setState({ 
+        cartTotal: this.props.sum
+        })
       , 100);
   }
-//   componentWillUnmount() {
-//     clearInterval(this.interval);
-//   }
 
-  onClick(){
-    this.setState({
-        collapse: !this.state.collapse,
-    });
-  }
-
-  toggle() {
-    this.setState({
-        dropdownOpen: !this.state.dropdownOpen
-    });
-  }
   render() {
     return (
-      <Navbar color="indigo" dark expand="md" scrolling className="navbar fixed-top navbar-light bg-faded" height="60" >
-        <NavbarBrand href="/">
-            <img src="https://image.freepik.com/vetores-gratis/e-commerce-conceito_23-2147505751.jpg" alt="Brand Logo" height="50" className="d-inline-block align-top"/>
-            <span className="brand-text" style={{marginLeft:"5px"}}>Assime-228</span>
-        </NavbarBrand>
-        { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
-        <Collapse isOpen = { this.state.collapse } navbar className=".d-xl-flex">
-            <NavbarNav left>
-                <NavItem active>
-                    <NavLink to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink to="cart">
-                      Cart
-                    </NavLink>
-                </NavItem>
-            </NavbarNav>
-            <NavbarNav >
-                
-                <NavItem>
-                    <NavLink to="/cart">
-                    <span className="cost-text" style={{marginLeft:"5px"}}>{`$${this.props.sum}`}</span>
-                    <img src="http://www.contadis.ch/includes/templates/Adidas_ch/images/shopping_cart_logo.gif" alt="Shopping Cart" className="shopping-buggy"/>
-                    </NavLink>
-                </NavItem>
-            </NavbarNav>
-            <NavbarNav right>
-            <NavItem>
-                    <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle className="upper-textes"  nav caret>{`Happy shopping, ${this.state.username}`}</DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem href="#">Profile</DropdownItem>
-                        <DropdownItem href="/" onClick={()=>firebase.auth().signOut()}>Log out!</DropdownItem>
-                    </DropdownMenu>
-                    </Dropdown>
-                </NavItem>
-                <NavItem>
-                </NavItem>
-            </NavbarNav>
-        </Collapse>
-    </Navbar>
+    <div style={{textAlign:"center"}}>
+        <Navbar inverse collapseOnSelect className="navbar navbar-inverse navbar-fixed-top">
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="/">Assime-228</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            
+            <Nav >
+              <NavDropdown eventKey={3} title={`Happy shopping, ${this.state.username}`} id="basic-nav-dropdown">
+                <MenuItem eventKey={3.1}>Profile</MenuItem>
+                <MenuItem divider />
+                <MenuItem eventKey={3.2} onClick={()=>firebase.auth().signOut()}>Log out!</MenuItem>
+              </NavDropdown>
+              <NavItem eventKey={2} href="cart">
+                <img src="http://www.icon100.com/up/1700/512/cart.png" alt="Shopping cart"/>
+                <span>{`$${this.props.sum}`}</span>
+              </NavItem>
+            </Nav>
+            <Nav pullRight>
+            <Nav>
+              <NavItem eventKey={1} href="/">
+                Home
+              </NavItem>
+              <NavItem eventKey={2} href="cart">
+                Cart
+              </NavItem>
+            </Nav>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>;
+      </div>
     )
   }
 }
@@ -104,5 +81,4 @@ function mapDispatchToProps(dispatch){
       }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(UserToolBar)
-
+export default connect(mapStateToProps, mapDispatchToProps)(UserToolBar);

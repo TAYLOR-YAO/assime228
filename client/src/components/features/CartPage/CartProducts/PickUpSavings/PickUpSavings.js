@@ -15,7 +15,7 @@ export default class PickUpSavings extends Component{
             <Tooltip id="tooltip">
                 <p>
                     Picking up your order in the store helps cut costs, 
-                    and we pass the savingson to you.
+                    and we pass the savings to you.
                 </p>
             </Tooltip>
         );

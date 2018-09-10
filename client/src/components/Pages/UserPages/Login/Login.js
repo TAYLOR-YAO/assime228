@@ -20,7 +20,7 @@ class Login extends Component {
         }
     };
 
-    componentDidMount = () =>{
+    async componentDidMount (){
         firebase.auth().onAuthStateChanged(user=>{
             this.setState({isSignedIn:!!user});
             if(user){

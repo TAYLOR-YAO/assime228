@@ -16,10 +16,13 @@ router.post("/sells", (req, res) => {
                         db.Cart.deleteOne({"_id": req.body._id}).then(deleted=>{
                         });
                     } else {
-                        db.Sells.create(req.body).then(sell=>{
+                        const {_id} =req.body;
+                        const newSell = req.body;
+                        delete newSell._id;
+                        db.Sells.create(newSell).then(sell=>{
                             res.send(sell)
                         }).then(sell=>{
-                            db.Cart.deleteOne({"_id": req.body._id}).then(deleted=>{
+                            db.Cart.deleteOne({"_id": _id}).then(deleted=>{
                             }).catch(err=>{
                                 return err.message
                             })
@@ -33,20 +36,12 @@ router.post("/sells", (req, res) => {
 });
 
 router.get("/getsells", (req, res) => { 
-    db.Sells.find({}).then(sells=>{
+        db.Sells.find({"storeId":req.query.storeId}).then(sells =>{
         res.send(sells)
     }).catch(err=>{
         return err.message
     })
 
-})
-router.get("/sellsbycompany", (req, res) => { 
-    db.Sells.find({"company":req.query.company}).then(sells =>{
-        res.send(sells)
-    }).catch(err=>{
-        return err.message
-    });
-
-})
+});
 
 module.exports = router;

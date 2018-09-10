@@ -1,28 +1,13 @@
 import React from "react";
-import axios from "axios";
 import ProductListItem from "./ProductListItem";
 import { connect } from "react-redux";
-
-function currentUser(){
-    let userId = localStorage.getItem("currentUserId");
-    return userId
-}
-function updateOrder(items){
-    const order = items.map(item=> {
-    item.customerID = currentUser();
-    return item
-    });
-    axios.post("api/order", order).then(response=>{
-        // console.log("Data...: ",response.data)
-    });
-}
+import "./indexStyle.css";
 
 function ProductListing(props){
-    updateOrder(props.cart)
-    return<div className="product-wrapper">
+    return<ul className="flex-container">
         {
             props.products.map(product=>
-            <div key={product._id}>
+            <li className="flex-idem" key={product._id}>
             <ProductListItem
                 addToCart={props.addToCart}
                 removeFromCart ={props.removeFromCart}
@@ -37,12 +22,12 @@ function ProductListing(props){
                 storeColor={product.storeColor}
                 textColor={product.textColor}
                 />
-            </div>
+            </li>
             )
 
         }
 
-    </div>
+    </ul>
 }
 
 function mapStateToProps(state){

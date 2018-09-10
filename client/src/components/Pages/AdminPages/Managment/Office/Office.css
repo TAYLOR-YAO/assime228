@@ -1,0 +1,22 @@
+.office{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.admin-navigator{
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    background: #6351ce;
+    height: 80px;
+    text-align: center;
+    color: #fff;
+    margin-top: -15px;
+    z-index: 100;
+}
+#noanim-tab-example a{
+    margin-top: 75px;
+   
+    color: gray;
+    font-size: 18px;
+}

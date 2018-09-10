@@ -18,7 +18,7 @@ router.post("/order", (req, res)=>{
 });
 
 router.get("/orders", (req, res)=>{
-    db.Cart.find({}).then(orders=>{
+        db.Cart.find({"storeId":req.query.storeId}).then(orders =>{
         res.send(orders)
     });
 });

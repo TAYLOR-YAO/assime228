@@ -1,11 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import axios from "axios";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import {Row, Col} from "react-bootstrap";
 import Checkout from "../../Checkout";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import PorductName from "../CartProducts/PorductName";
 import Subtotal from "../CartProducts/Subtotal/Subtotal";
 import PickUpSavings from "../CartProducts/PickUpSavings/PickUpSavings";
+import TaxeFeeds from "../CartProducts/TaxeFeeds/TaxeFeeds";
 import EstimatedTotal from "../CartProducts/EstimatedTotal/EstimatedTotal";
 import ItemDetails from "../CartProducts/ItemDetails/ItemDetails";
 import ItemHandler from "../CartProducts/ItemHandler/ItemHandler";
@@ -15,6 +17,11 @@ const savings = -3.85;
 const defaultSum = 0;
 let cartSum;
 
+function percentage(num)
+{
+  return (Math.round(num)/100)* 8.9;
+}
+
 function sortItemInCart(item){
     return item.sort((a, b)=> a._id < b._id)
 }
@@ -23,13 +30,18 @@ function currentUser(){
     return userId
 }
 function Cart(props){
-    const order = props.cart.map(item=> {
-        item.customerID = currentUser();
-        return item
-    })
-    axios.post("api/order", order).then(response=>{
-    });
-
+    function processOrder(){
+        const order = props.cart.map(item=> {
+            item.customerID = currentUser();
+            return item
+        })
+        axios.post("api/order", order).then(response=>{
+            props.clearCarts(props.cart)
+            console.log("order is Presessed: ", response.data)
+        }).catch(err=>{
+            console.log("ERR: ",err.message)
+        })
+    }
     if(Array.isArray(props.cart) || props.cart.length){
         cartSum = props.cart.map(item=>{
             return item.price.$numberDecimal * item.quantity
@@ -38,8 +50,12 @@ function Cart(props){
         cartSum = defaultSum.toFixed(2)
     }
     return <div style={{textAlign:"center"}}>
-            <h4>Cart Total: {`$${cartSum}`}</h4>
+        <h4>Cart Total: {`$${cartSum}`}</h4>
+        <div onClick={()=>processOrder()}>
             <Checkout/>
+        </div>
+        
+        <div style={{marginTop:"-150px"}}>                
             <TableView
                 tableView ={
                     <div className="table-data">
@@ -81,70 +97,55 @@ function Cart(props){
                 </div>
                 }
             />
-        <div className="item-wrapper">
-            {
-                sortItemInCart(props.cart).map(item=><div key={item._id}>
-                    <div className="item-card">
-                        <div className="view view-cascade gradient-card-header blue-gradient">
-                            <h6 className="card-header-title mb-3">{item.company}</h6>
-                            <p className="card-header-subtitle mb-0">
-                            <ItemHandler
-                                addToCart = {()=> props.addToCart(item)}
-                                removeFromCart = {()=> props.removeFromCart(item)}
-                                removeAllFromCart = {()=> props.removeAllFromCart(item)}
-                            />
-                            </p>
-                            <PorductName
-                            name={item.name}
-                            />
+             
+            <div className="item-wrapper">
+                {
+                    sortItemInCart(props.cart).map(item=><div key={item._id}>
+                        <div className="order-item">
+                            <div className="box">
+                                <img className="item-photo" src={item.image} alt="Item"/>
+                            </div>
+                            <div className="box" id="sider">
+                                <div className="view view-cascade gradient-card-header blue-gradient">
+                                        <h6 className="card-header-title mb-3">{item.company}</h6>
+                                        <div className="card-header-subtitle mb-0">
+                                        <ItemHandler
+                                            addToCart = {()=> props.addToCart(item)}
+                                            removeFromCart = {()=> props.removeFromCart(item)}
+                                            removeAllFromCart = {()=> props.removeAllFromCart(item)}
+                                        />
+                                        </div>
+                                        <PorductName
+                                        name={item.name}
+                                        />
 
+                                    </div>
+                                    <div className="card-body card-body-cascade text-center">
+                                        <Subtotal price={item.price.$numberDecimal}/>
+                                        <TaxeFeeds
+                                        taxes = {percentage(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                        />
+                                        <PickUpSavings price={`${savings}`}/>
+                                        <ItemDetails
+                                        price={item.price.$numberDecimal}
+                                        image={item.image}
+                                        quantity={item.quantity}
+                                        />
+                                        <hr/>
+                                        
+                                        <EstimatedTotal 
+                                            noTaxes = {(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                            price={(percentage(item.price.$numberDecimal * item.quantity) + (item.price.$numberDecimal * item.quantity)).toFixed(2)}
+                                            quantity={item.quantity}
+                                        />
+                                    </div>                 
+                                </div>
+                            <hr/>                                                                                                                             
                         </div>
-                        <div className="card-body card-body-cascade text-center">
-                            <Subtotal price={item.price.$numberDecimal}/>
-                            <PickUpSavings price={`${savings}`}/>
-                            <ItemDetails
-                            price={item.price.$numberDecimal}
-                            image={item.image}
-                            quantity={item.quantity}
-                            />
-                            <hr/>
-                            <EstimatedTotal 
-                                price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
-                                quantity={item.quantity}
-                            />
-                        </div>
-
-
-                    
-
-
-                        {/* <div style={{textAlign:"center"}}><h5>All details</h5></div>
-                        <hr/>
-                        <ItemHandler
-                            addToCart = {()=> props.addToCart(item)}
-                            removeFromCart = {()=> props.removeFromCart(item)}
-                            removeAllFromCart = {()=> props.removeAllFromCart(item)}
-                        />
-                        <hr/>
-                        <PorductName
-                        name={item.name}
-                        />
-                        <Subtotal price={item.price.$numberDecimal}/>
-                        <PickUpSavings price={`${savings}`}/>
-                        <hr/>
-                        <EstimatedTotal 
-                            price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
-                            quantity={item.quantity}
-                        />
-                        <ItemDetails
-                        price={item.price.$numberDecimal}
-                        image={item.image}
-                        quantity={item.quantity}
-                        /> */}
                     </div>
-                </div>
-                )
-            }
+                    )
+                }
+            </div>
         </div>
     </div>
 }
@@ -164,6 +165,9 @@ function mapDispatchToProps(dispatch){
         },
         removeAllFromCart:(item) =>{
             dispatch({type: "REMOVE_All", payload:item})
+        },
+        clearCarts:(item) =>{
+            dispatch({type: "CLEAR_CARTS"})
         }
     }
 }

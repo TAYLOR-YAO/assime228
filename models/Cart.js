@@ -15,6 +15,10 @@ const CartSchema = new Schema({
         type:String,
         required:true
     },
+    color:{
+        type: String,
+        required: true
+    },
     price:{
         type: Schema.Types.Decimal128,
         required:true

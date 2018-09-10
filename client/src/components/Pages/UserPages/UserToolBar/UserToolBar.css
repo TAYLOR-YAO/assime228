@@ -1,3 +1,36 @@
+.navbar{
+    background: #6351ce;
+}
+#root > div > div > div > div > div:nth-child(1) > nav > div > div.navbar-header > a{
+    color: #fff;
+}
+#root > div > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse.in > ul.nav.navbar-nav.navbar-right > ul > li > a{
+    color: #fff;
+}
+#basic-nav-dropdown{
+    color: #fff;
+}
+#root > div > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse.in > ul:nth-child(1) > li:nth-child(2) > a > span{
+    color: #fff;
+    font-size: 24px;
+}
+#root > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse > ul:nth-child(1) > li:nth-child(2) > a > img{
+    width: 60px;
+    margin-top: -10px;
+    margin-left: 50px;
+}
+#root > div > div > div > div:nth-child(1) > nav > div > div.navbar-header > a{
+    color: #fff;
+}
+#root > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse > ul.nav.navbar-nav.navbar-right > ul > li > a{
+    color: #fff;
+}
+
+#root > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse > ul:nth-child(1) > li:nth-child(2) > a > span{
+    color: #fff;
+    font-size: 24px;
+}
+
 .brand-text{
     position: relative;
     top: 10px;
@@ -20,4 +53,23 @@
     position: relative;
     height: 70px;
     margin-bottom: -30px;
+}
+
+#root > div > footer{
+    background: #333;
+    color: #fff;
+}
+
+#root > div > footer a{
+    color: #fff;
+    text-decoration: none;
+}
+#root > div > div > div > div > div:nth-child(1) > nav > div > div.navbar-header > a{
+    font-size: 30px;
+}
+
+#root > div > div > div > div > div:nth-child(1) > nav > div > div.navbar-collapse.collapse > ul:nth-child(1) > li:nth-child(2) > a > img{
+    width: 60px;
+    margin-top: -10px;
+    margin-left: 50px;
 }

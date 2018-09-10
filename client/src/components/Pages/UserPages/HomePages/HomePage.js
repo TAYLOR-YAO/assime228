@@ -3,7 +3,7 @@ import Select from 'react-select';
 import axios from "axios";
 import "./HomePage.css";
 import ProductLinsting from "../../../features/ProductListing";
-import UserNavbar from "../UserToolBar";
+// import UserNavbar from "../UserToolBar";
 
 class HomePage extends Component {
     state={
@@ -18,9 +18,9 @@ class HomePage extends Component {
         types:[]
     }
     
-    componentDidMount = ()=>{
+     componentDidMount (){
         axios.get("api/displayitems").then(response=>{
-            this.setState({generalProducts: response.data})
+            // this.setState({generalProducts: response.data})
             const categories = [];
             const companies = [];
             const types = [];
@@ -57,6 +57,7 @@ class HomePage extends Component {
             this.setState(
                 {
                     products: response.data.sort(function() { return 0.5 - Math.random() }),
+                    generalProducts: response.data,
                     categories: categories,
                     companies: companies,
                     types: types
@@ -97,50 +98,50 @@ class HomePage extends Component {
     
     render(){
         return(
-            <div>
-                  <UserNavbar/>
-            <div id="main">
-                <aside>
-                    <div>
-                        <p style={{position:"relative", top:"10px"}}>Shop by type</p>
-                        <Select
-                            placeholder={"Search Item"}
-                            value={this.state.typeOption}
-                            onChange={this.handleTypeChange}
-                            options={this.state.types}
-                        />
-                    </div>
-                    <div>
-                        <p style={{position:"relative", top:"10px"}}>Shop By Categories</p>
-                        <Select
-                            placeholder={"Search by category"}
-                            value={this.state.categoryOption}
-                            onChange={this.handleCategoryChange}
-                            options={this.state.categories}
-                        />
-                    </div>
-                    <div>
-                    <p style={{position:"relative", top:"10px"}}>Select company</p>
-                        <Select
-                            placeholder={"Select by Company"}
-                            value={this.state.companyOption}
-                            onChange={this.handleCompanyChange}
-                            options={this.state.companies}
-                        />
-                    </div>
-                    
-                </aside>
-                <article>
-                <ProductLinsting 
-                    products ={this.state.products}
-                    displayComoanyArticles={this.displayComoanyArticles}
-                />
-                 <ProductLinsting 
-                    products ={this.state.generalProducts}
-                    displayComoanyArticles={this.displayComoanyArticles}
-                />
-                </article>
-            </div>
+        <div style={{marginTop:"100px"}}>
+
+                <div id="main">
+                    <aside>
+                        <div>
+                            <p style={{position:"relative", top:"10px"}}>Shop by type</p>
+                            <Select
+                                placeholder={"Search Item"}
+                                value={this.state.typeOption}
+                                onChange={this.handleTypeChange}
+                                options={this.state.types}
+                            />
+                        </div>
+                        <div>
+                            <p style={{position:"relative", top:"10px"}}>Shop By Categories</p>
+                            <Select
+                                placeholder={"Search by category"}
+                                value={this.state.categoryOption}
+                                onChange={this.handleCategoryChange}
+                                options={this.state.categories}
+                            />
+                        </div>
+                        <div>
+                        <p style={{position:"relative", top:"10px"}}>Select company</p>
+                            <Select
+                                placeholder={"Select by Company"}
+                                value={this.state.companyOption}
+                                onChange={this.handleCompanyChange}
+                                options={this.state.companies}
+                            />
+                        </div>
+                        
+                    </aside>
+                    <article>
+                    <ProductLinsting 
+                        products ={this.state.products}
+                        displayComoanyArticles={this.displayComoanyArticles}
+                    />
+                    <ProductLinsting 
+                        products ={this.state.generalProducts}
+                        displayComoanyArticles={this.displayComoanyArticles}
+                    />
+                    </article>
+                </div> 
             </div>
         )
     }

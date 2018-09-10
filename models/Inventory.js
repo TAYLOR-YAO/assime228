@@ -35,10 +35,6 @@ const InventorySchema = new Schema({
         type: Schema.Types.Decimal128,
         required:true
     },
-    // sku:{
-    //     type:Number,
-    //     required:true
-    // },
     both:{
         type:Number,
         required:true
@@ -58,6 +54,10 @@ const InventorySchema = new Schema({
     brand:{
         type:String,
         require:true
+    },
+    color:{
+        type: String,
+        required: true
     },
     updatedTime:{
         type: Date,

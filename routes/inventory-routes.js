@@ -3,16 +3,28 @@ const mongoose = require("mongoose");
 const db = require("../models");
 const router = express.Router();
 
-
 router.post("/addinventory", (req, res)=>{
+    // console.log("BODY:....",req.body)
     db.Inventory.create(req.body).then(items=>{
+        // console.log("ITEMS:....",items)
         res.json(items)
     })
     .catch(function(err) {
         console.error("ERR.....",err);
     })
-
 });
+
+// ========= Store Identification ======
+router.post("/storeIdentification", (req, res)=>{
+    const {storeID} = req.body;
+    db.Stores.findById(storeID).then(store=>{
+        res.json(store)
+    })
+    .catch(function(err) {
+        console.error("ERR.....",err.message);
+    });
+});
+// =======================================
 
 router.get("/displayitems", (req, res)=>{
     db.Inventory.find({}).then(items=>{
@@ -25,7 +37,7 @@ router.get("/displayitems", (req, res)=>{
 });
 
 router.get("/products", (req, res)=>{
-    db.Inventory.find({}).then(products=>{
+        db.Inventory.find({"storeId":req.query.storeId}).then(products =>{
         res.json(products)
     })
     .catch(function(err) {

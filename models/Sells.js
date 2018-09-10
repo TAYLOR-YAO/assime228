@@ -47,6 +47,10 @@ const SellSchema = new Schema({
         type:String,
         require:true
     },
+    color:{
+        type: String,
+        required: true
+    },
     type:{
         type:String,
         require:true
