@@ -30,7 +30,17 @@ router.get("/displayitems", (req, res)=>{
     })
     .catch(function(err) {
         console.error("ERR.....",err);
+    });
+
+});
+
+router.get("/dashboardlayouts", (req, res)=>{
+    db.Inventory.find({"storeId": req.query.storeId}).then(items=>{
+        res.json(items)
     })
+    .catch(function(err) {
+        console.error("ERR.....",err);
+    });
 
 });
 
@@ -40,8 +50,7 @@ router.get("/products", (req, res)=>{
     })
     .catch(function(err) {
         console.error("ERR.....",err);
-    })
-
+    });
 });
 
 router.post("/updateinventory", (req, res)=>{

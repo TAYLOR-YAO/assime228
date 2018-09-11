@@ -1,8 +1,21 @@
 import React, {Component} from "react";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 import {Modal,Button} from "react-bootstrap";
 import {Grid, Cell, Textfield} from "react-mdl";
+
+function sessionValidation(){
+    axios.get("api/storeIdentification").then(res=>{
+        if (res.data === undefined || res.data.length == 0) {
+            function removeFromStorage(){
+                localStorage.removeItem("identifiedSore");
+                <Redirect to='/office' />
+            }
+            return removeFromStorage();
+        }    
+    });
+}
+sessionValidation();
 
 class StoreIdentification extends Component {
     state = {
@@ -24,7 +37,6 @@ class StoreIdentification extends Component {
         axios.post("api/storeIdentification", this.state).then(res=>{
             console.log(res.data)
             if(!res.data){
-                console.log("INvalide")
                 this.setState({errMessage: "Err: Invalide ID"})
             }
             localStorage.setItem("identifiedSore", JSON.stringify(res.data));

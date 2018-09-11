@@ -11,6 +11,14 @@ router.post("/registration", (req, res) => {
     });
 });
 
+router.get("/storeIdentification", (req, res) => {  
+    db.Stores.find({}).then(stores =>{
+        res.send(stores)
+    }).catch(err=>{
+        console.log(err.message);
+    });
+});
+
 router.get("/displaystoreitems", (req, res) => {   
     db.Inventory.find({"company":req.query.company}).then(storeItems =>{
         res.send(storeItems)

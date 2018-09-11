@@ -39,13 +39,13 @@ class Receiving extends Component {
 
 
 
-    handleImageChange = event => {
-        event.preventDefault();        
+    // handleImageChange = event => {
+    //     event.preventDefault();        
 
-        this.setState({
-          image: URL.createObjectURL(event.target.files[0])
-        });
-    }
+    //     this.setState({
+    //       image: URL.createObjectURL(event.target.files[0])
+    //     });
+    // }
 
     handleInputsChanges = event => {
         const { target: { name, value } } = event;
@@ -85,15 +85,15 @@ class Receiving extends Component {
                     <Grid className="demo-grid-1">
                         <Cell col={3}>
                             <h6>Iteme Image</h6>
-                            <input type="file" onChange={this.handleImageChange}/>
+                            {/* <input type="file" onChange={this.handleImageChange}/> */}
 
-                            {/* <Textfield
+                            <Textfield
                                 label="Iteme Image Url"
                                 floatingLabel
                                 style={{width: '100%'}}
                                 name="image"
                                 onChange={this.handleInputsChanges}
-                            /> */}
+                            />
                         </Cell> 
                         <Cell col={3}>
                             <h6>Item Name</h6>

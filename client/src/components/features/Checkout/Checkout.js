@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import {Modal, Button, Row, Col} from "react-bootstrap";
 import StipeCheckout from "./StripeCheckout";
 import "./Checkout.css"
-class Trigger extends React.Component {
+class Trigger extends Component {
     constructor(props, context) {
       super(props, context);
-  
       this.handleHide = this.handleHide.bind(this);
   
       this.state = {

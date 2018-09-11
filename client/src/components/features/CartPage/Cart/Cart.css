@@ -98,15 +98,31 @@ tr:hover{
     .table-data{
         margin-left: -20px;
     }
+    .order-item{
+        width: 100%;
+    }
+    .box{
+        height: 300px !important;   
+    }
+    #sider{
+     height: 600px !important;
+    }
 }
 @media only screen and (max-width: 375px) {
     .box{
-       height: 400px;   
+       height: 250px !important;   
    }
+   #sider{
+    height: 600px !important;
+    }
     .table-data{
         margin-left: -50px;
     }
+    .order-item{
+        width: 100%;
+    }
 }
+
 @media only screen and (max-width: 320px) {
     .table-data{
         margin-left: -70px;
@@ -114,6 +130,7 @@ tr:hover{
 }
 
 @media only screen and (max-width: 768px) {
+
     .order-item{
         width: 80%;
         margin: 10px auto;
@@ -129,4 +146,10 @@ tr:hover{
         height: 600px;
     }
     
+}
+@media only screen and (max-width: 1024px) {
+    .box{
+        height: 450px;
+         
+    }
 }

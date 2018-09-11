@@ -1,19 +1,19 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import Select from 'react-select';
 import axios from "axios";
-import "./HomePage.css";
-import ProductLinsting from "../../../features/ProductListing";
-import Checkout from "../../../features/Checkout";
+import "./LayoutView.css";
+import ProductLinsting from "../../../../features/ProductListing";
 
-function currentUser(){
-    let userId = localStorage.getItem("currentUserId");
-    return userId
+const valide = localStorage.getItem("identifiedSore");
+function valideted(){
+    if(valide){
+       return JSON.parse(valide);
+    } else {
+        return ""
+    }
 }
 
-
-
-class HomePage extends Component {
+class LayoutView extends Component {
     state={
         typeOption: null,
         categoryOption: null,
@@ -26,19 +26,9 @@ class HomePage extends Component {
         types:[]
     }
     
-     processOrder = event =>{
-        const order = this.props.cart.map(item=> {
-            item.customerID = currentUser();
-            return item
-        })
-        axios.post("api/order", order).then(response=>{
-        }).catch(err=>{
-            console.log("ERR: ",err.message)
-        })
-    }
-
-     componentDidMount (){
-        axios.get("api/displayitems").then(response=>{
+    componentDidMount (){
+        axios.get(`api/dashboardlayouts/?storeId=${valideted()._id}`).then(response=>{
+            console.log(response.data)
             const categories = [];
             const companies = [];
             const types = [];
@@ -74,8 +64,7 @@ class HomePage extends Component {
 
             this.setState(
                 {
-                    products: response.data.sort(function() { return 0.5 - Math.random() }),
-                    generalProducts: response.data,
+                    products: response.data,
                     categories: categories,
                     companies: companies,
                     types: types
@@ -116,15 +105,10 @@ class HomePage extends Component {
     
     render(){
         return(
-        <div style={{marginTop:"100px"}}>
-
+            <div >
                 <div id="main">
                     <aside style={{textAlign:"center"}}>
-                        <div onClick={this.processOrder}>
-                            <Checkout/>
-                        </div>
-                       
-                        <div className="searchBar">
+                        <div >
                             <div>
                                 <p style={{position:"relative", top:"10px"}}>Shop by type</p>
                                 <Select
@@ -159,28 +143,13 @@ class HomePage extends Component {
                         products ={this.state.products}
                         displayComoanyArticles={this.displayComoanyArticles}
                     />
-                    <ProductLinsting 
-                        products ={this.state.generalProducts}
-                        displayComoanyArticles={this.displayComoanyArticles}
-                    />
                     </article>
                 </div> 
             </div>
         )
     }
 }
-function mapStateToProps(state){
-    return{
-        cart:state.cart
-    }
-}
-function mapDispatchToProps(dispatch){
-    return{
-        clearCarts:(item) =>{
-            dispatch({type: "CLEAR_CARTS"})
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
+export default LayoutView;
 
 

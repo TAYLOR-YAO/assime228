@@ -16,7 +16,51 @@
 }
 #noanim-tab-example a{
     margin-top: 75px;
-   
     color: gray;
     font-size: 18px;
+}
+
+.close-session{
+    margin-right: 10px;
+    float: right !important;
+    margin-top: -70px !important;
+}
+.close-sessionBtn{
+    background: #333 !important;
+    color: #fff !important;
+}
+@media only screen and (max-width: 768px) {
+    .brand-holder{
+        position: relative;
+        right: 100px;
+    }
+    .office span{
+        margin-left: 20px !important;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .close-sessionBtn{
+      
+        font-size: 10px !important;
+    }
+    .brand-holder h3{
+       font-size: 16px !important;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .brand-holder{
+       position: relative;
+        right: 60px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .brand-holder h3{
+        font-size: 12px !important;
+     }
+     .close-sessionBtn{
+       width: 90px !important;
+    }
 }

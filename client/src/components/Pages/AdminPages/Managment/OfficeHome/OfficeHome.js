@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import StoreIdentification from "./StoreIdentification";
+
 const valide = localStorage.getItem("identifiedSore");
 function valideted(){
     if(valide){

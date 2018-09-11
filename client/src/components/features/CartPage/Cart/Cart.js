@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import axios from "axios";
-import {Row, Col} from "react-bootstrap";
 import Checkout from "../../Checkout";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import PorductName from "../CartProducts/PorductName";
@@ -36,7 +35,7 @@ function Cart(props){
             return item
         })
         axios.post("api/order", order).then(response=>{
-            props.clearCarts(props.cart)
+            // props.clearCarts(props.cart)
             // console.log("order is Presessed: ", response.data)
         }).catch(err=>{
             console.log("ERR: ",err.message)

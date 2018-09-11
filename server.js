@@ -7,6 +7,7 @@ const storeRoutes = require("./routes/stores-routes");
 const cartRoutes = require("./routes/cart-routes");
 const userRoutes = require("./routes/signin-routes");
 const sellsRoutes = require("./routes/sells-routes");
+const updatesRoutes = require("./routes/updates-routes");
 
 
 const path = require("path");
@@ -33,6 +34,7 @@ app.use("/api", storeRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", userRoutes);
 app.use("/api", sellsRoutes);
+app.use("/api", updatesRoutes);
 
 
 
