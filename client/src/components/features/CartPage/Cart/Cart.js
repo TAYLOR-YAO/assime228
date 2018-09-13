@@ -5,14 +5,12 @@ import Checkout from "../../Checkout";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import PorductName from "../CartProducts/PorductName";
 import Subtotal from "../CartProducts/Subtotal/Subtotal";
-import PickUpSavings from "../CartProducts/PickUpSavings/PickUpSavings";
-import TaxeFeeds from "../CartProducts/TaxeFeeds/TaxeFeeds";
 import EstimatedTotal from "../CartProducts/EstimatedTotal/EstimatedTotal";
 import ItemDetails from "../CartProducts/ItemDetails/ItemDetails";
 import ItemHandler from "../CartProducts/ItemHandler/ItemHandler";
 import TableView from './TableView/TableView';
 import "./Cart.css";
-const savings = -3.85;
+
 const defaultSum = 0;
 let cartSum;
 
@@ -24,23 +22,11 @@ function percentage(num)
 function sortItemInCart(item){
     return item.sort((a, b)=> a._id < b._id)
 }
-function currentUser(){
-    let userId = localStorage.getItem("currentUserId");
-    return userId
-}
+// function currentUser(){
+//     let userId = localStorage.getItem("currentUserId");
+//     return userId
+// }
 function Cart(props){
-    function processOrder(){
-        const order = props.cart.map(item=> {
-            item.customerID = currentUser();
-            return item
-        })
-        axios.post("api/order", order).then(response=>{
-            // props.clearCarts(props.cart)
-            // console.log("order is Presessed: ", response.data)
-        }).catch(err=>{
-            console.log("ERR: ",err.message)
-        })
-    }
     if(Array.isArray(props.cart) || props.cart.length){
         cartSum = props.cart.map(item=>{
             return item.price.$numberDecimal * item.quantity
@@ -49,11 +35,9 @@ function Cart(props){
         cartSum = defaultSum.toFixed(2)
     }
     return <div style={{textAlign:"center"}}>
+
         <h4>Cart Total: {`$${cartSum}`}</h4>
-        <div onClick={()=>processOrder()}>
-            <Checkout/>
-        </div>
-        
+        <Checkout/>
         <div style={{marginTop:"-150px"}}>                
             <TableView
                 tableView ={
@@ -120,23 +104,36 @@ function Cart(props){
 
                                     </div>
                                     <div className="card-body card-body-cascade text-center">
-                                        <Subtotal price={item.price.$numberDecimal}/>
-                                        <TaxeFeeds
-                                        taxes = {percentage(item.price.$numberDecimal * item.quantity).toFixed(2)}
-                                        />
-                                        <PickUpSavings price={`${savings}`}/>
+                                        <Subtotal price={`$${item.price.$numberDecimal}`}/>
+                                       
                                         <ItemDetails
-                                        price={item.price.$numberDecimal}
-                                        image={item.image}
-                                        quantity={item.quantity}
+                                            price={item.price.$numberDecimal}
+                                            image={item.image}
+                                            quantity={item.quantity}
+                                            // otherDetailes = {
+                                            //     <div>
+                                            //         <TaxeFeeds
+                                            //         taxes = {percentage(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                            //         />
+                                            //         <PickUpSavings price={`${savings}`}/>
+                                            //     </div>
+                                            // }
+                                            estimetedPrice = {
+                                                <EstimatedTotal 
+                                                    noTaxes = {(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                                    price={(item.price.$numberDecimal * item.quantity) + (item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                                    quantity={item.quantity}
+                                                />
+                                            }
                                         />
                                         <hr/>
-                                        
-                                        <EstimatedTotal 
-                                            noTaxes = {(item.price.$numberDecimal * item.quantity).toFixed(2)}
-                                            price={(percentage(item.price.$numberDecimal * item.quantity) + (item.price.$numberDecimal * item.quantity)).toFixed(2)}
-                                            quantity={item.quantity}
-                                        />
+                                        <div className="hidablePrice-detaile">
+                                            <EstimatedTotal 
+                                                noTaxes = {(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                                price={(item.price.$numberDecimal * item.quantity).toFixed(2)}
+                                                quantity={item.quantity}
+                                            />
+                                        </div>
                                     </div>                 
                                 </div>
                             <hr/>                                                                                                                             

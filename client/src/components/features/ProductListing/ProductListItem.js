@@ -12,7 +12,10 @@ export default function ProductListItem(props){
             </div>
             <div>
                 <p >{props.name}</p>
-                <p style={{color:"red"}} className="item-information">${props.price}</p>
+                <div style={{padding: "5px"}} >
+                    <p style={{color:"#000", float:"left"}} className="item-information">Price: <span style={{color:"red"}}>{`$${props.price}`}</span></p>
+                    <p style={{color:"#333"}} className="item-information"> { props.size ? `size: ${props.size}`  : " "} </p>
+                </div>
                 <ItemDetails details={props.details}/>
             </div> 
                 <div className="addToCart">

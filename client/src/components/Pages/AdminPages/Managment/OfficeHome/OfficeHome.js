@@ -18,7 +18,7 @@ class OfficeHome extends Component{
             return<StoreIdentification/>
         }
         return(
-            <div>  
+            <div style={{marginBottom:"250px"}}>  
                 <h1>Office Home page</h1>
             </div>
         )

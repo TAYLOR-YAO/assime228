@@ -11,11 +11,13 @@
     width: 75%;
     margin: 10px auto;
 }
+
 .box{
      width: 50%;
      float: left;
     border: 5px double #333;
     height: 500px;
+    overflow: auto;
      
 }
 .item-photo{
@@ -105,7 +107,10 @@ tr:hover{
         height: 300px !important;   
     }
     #sider{
-     height: 600px !important;
+     height: 270px !important;
+    }
+    .hidablePrice-detaile{
+        display: none;
     }
 }
 @media only screen and (max-width: 375px) {
@@ -113,7 +118,7 @@ tr:hover{
        height: 250px !important;   
    }
    #sider{
-    height: 600px !important;
+    height: 270px !important;
     }
     .table-data{
         margin-left: -50px;

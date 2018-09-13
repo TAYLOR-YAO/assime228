@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const db = require("../models");
 const router = express.Router();
 
+
 router.post("/addinventory", (req, res)=>{
     db.Inventory.create(req.body).then(items=>{
         res.json(items)

@@ -28,7 +28,6 @@ class LayoutView extends Component {
     
     componentDidMount (){
         axios.get(`api/dashboardlayouts/?storeId=${valideted()._id}`).then(response=>{
-            console.log(response.data)
             const categories = [];
             const companies = [];
             const types = [];
@@ -110,7 +109,7 @@ class LayoutView extends Component {
                     <aside style={{textAlign:"center"}}>
                         <div >
                             <div>
-                                <p style={{position:"relative", top:"10px"}}>Shop by type</p>
+                                <p style={{position:"relative", top:"10px"}}>Shop by Item</p>
                                 <Select
                                     placeholder={"Search Item"}
                                     value={this.state.typeOption}
@@ -125,15 +124,6 @@ class LayoutView extends Component {
                                     value={this.state.categoryOption}
                                     onChange={this.handleCategoryChange}
                                     options={this.state.categories}
-                                />
-                            </div>
-                            <div>
-                            <p style={{position:"relative", top:"10px"}}>Select company</p>
-                                <Select
-                                    placeholder={"Select by Company"}
-                                    value={this.state.companyOption}
-                                    onChange={this.handleCompanyChange}
-                                    options={this.state.companies}
                                 />
                             </div>
                         </div>

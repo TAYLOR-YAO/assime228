@@ -34,7 +34,7 @@ export default class ItemDetails extends Component{
                                     />
                                 </Media.Left>
                                 <Media.Body>
-                                    <p>100% cotton lasts long.</p>
+                                    <p>{this.props.details}</p>
                                     <Row className="show-grid">
                                         <Col md={6}>
                                             <strong>{`$${this.props.price}`}</strong>
@@ -44,11 +44,17 @@ export default class ItemDetails extends Component{
                                         <Col md={6}>
                                         <strong>Qty: {this.props.quantity}</strong>
                                         </Col>
-                                    </Row>                                    
+                                    </Row>                                       
                                 </Media.Body>
-                                    
                             </Media>
+                            <Row className="show-grid">
+                                {this.props.otherDetailes}
+                            </Row> 
+                            <Row className="show-grid">
+                                {this.props.estimetedPrice}
+                            </Row> 
                         </Well>
+
                     </div>
                 </Collapse>
             </div>

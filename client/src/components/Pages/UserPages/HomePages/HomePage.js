@@ -26,16 +26,16 @@ class HomePage extends Component {
         types:[]
     }
     
-     processOrder = event =>{
-        const order = this.props.cart.map(item=> {
-            item.customerID = currentUser();
-            return item
-        })
-        axios.post("api/order", order).then(response=>{
-        }).catch(err=>{
-            console.log("ERR: ",err.message)
-        })
-    }
+    //  processOrder = event =>{
+    //     const order = this.props.cart.map(item=> {
+    //         item.customerID = currentUser();
+    //         return item
+    //     })
+    //     axios.post("api/order", order).then(response=>{
+    //     }).catch(err=>{
+    //         console.log("ERR: ",err.message)
+    //     })
+    // }
 
      componentDidMount (){
         axios.get("api/displayitems").then(response=>{
@@ -120,13 +120,13 @@ class HomePage extends Component {
 
                 <div id="main">
                     <aside style={{textAlign:"center"}}>
-                        <div onClick={this.processOrder}>
+                        {/* <div onClick={this.processOrder}> */}
                             <Checkout/>
-                        </div>
+                        {/* </div> */}
                        
                         <div className="searchBar">
                             <div>
-                                <p style={{position:"relative", top:"10px"}}>Shop by type</p>
+                                <p style={{position:"relative", top:"10px"}}>Shop by Item</p>
                                 <Select
                                     placeholder={"Search Item"}
                                     value={this.state.typeOption}

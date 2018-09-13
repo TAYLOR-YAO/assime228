@@ -48,7 +48,9 @@ class Trigger extends Component {
                         <h6> Credit & debit</h6>
                         <hr/>
                         <br/>
-                        <StipeCheckout/>
+                        <div style={{position:"relative", bottom:"15px"}}>
+                          <StipeCheckout/>
+                        </div>
                         
                     </Col>
                     <Col md={3} style={{borderLeft:"3px solid #333"}}>

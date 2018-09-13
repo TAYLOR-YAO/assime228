@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 import axios from "axios";
+import CustomerInfos from "../CustomerInfos/CustomerInfos";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import {Row, Col} from "react-bootstrap";
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
@@ -26,23 +27,26 @@ class Sells extends Component{
     }
 
     componentDidMount (){
-        // this.interval = setInterval(() =>{
-            axios.get(`api/getsells/?storeId=${valideted()._id}`).then(response=>{                      
-                const ordersValue =[]
-                response.data.map(item=>
-                    ordersValue.push(item.quantity * item.price.$numberDecimal)
-                );
-                this.setState({
-                    orders: response.data,
-                    productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
-                });
+        axios.get(`api/getsells/?storeId=${valideted()._id}`).then(response=>{                      
+            const ordersValue =[]
+            response.data.map(item=>
+                ordersValue.push(item.quantity * item.price.$numberDecimal)
+            );
+            this.setState({
+                orders: response.data,
+                productsValue: ordersValue.reduce((a, b) => a + b, 0).toFixed(2)
             });
-        // });  
+        });  
     }
 
-    // componentWillMount (){
-    //     clearInterval(this.interval)
-    // }
+    handleDelivery(event) {
+        event.preventDefault();
+        const item = JSON.parse(event.currentTarget.dataset.item);
+        axios.post("api/delivered", item).then(response=>{
+        }).catch(err=>{
+            console.log(err.message)
+        })
+    }
     
     render(){
         return(<div>
@@ -69,7 +73,9 @@ class Sells extends Component{
                             <Th>Brand</Th>                                    
                             <Th>Qty</Th>            
                             <Th>Unit price</Th>
-                            <Th>Both price</Th>                          
+                            <Th>Both price</Th>
+                            <Th>Customer</Th>                            
+                            <Th>Delivered</Th>                           
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -79,7 +85,21 @@ class Sells extends Component{
                                 <Td>{product.brand}</Td>                
                                 <Td>{product.quantity}</Td>
                                 <Td>{product.price.$numberDecimal}</Td>
+                                
+                                <Td>
+                                    {
+                                    <CustomerInfos
+                                        customerName = {`Name: ${product.customerName}`}
+                                        address = {`Adress: ${product.customerAddress}`}
+                                        color = {product.color}
+                                        size = {product.size}
+                                        image = {product.image}
+                                        quantity = {product.quantity}
+                                    />
+                                    }
+                                </Td>                                
                                 <Td className="both-price">{(product.price.$numberDecimal * product.quantity).toFixed(2)}</Td>
+                                <Td><button onClick={this.handleDelivery.bind(this)} data-item={JSON.stringify(product)} data-id={product._id}  data-quantity={product.quantity} style={{background: valideted().storeColor, color: valideted().textColor}} >Delivered ?</button></Td>
                             </Tr>
                         ))
                         }

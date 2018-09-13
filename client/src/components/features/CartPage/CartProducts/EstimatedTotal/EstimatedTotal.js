@@ -15,11 +15,11 @@ export default class EstimatedTotal extends Component{
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <h5>Est. Total:</h5>
+                        <h6>Est. Total:</h6>
                     </Col>
                     <Col md={6} >
                         <strong className="price-stike" style={{position:"relative",bottom:"-15px"}}>{`$${this.props.noTaxes}`}</strong>                                                                
-                        <h5>{`$${this.props.price}`}</h5>
+                        <h6>{`$${this.props.price}`}</h6>
                     </Col>
                 </Row>
             </div>

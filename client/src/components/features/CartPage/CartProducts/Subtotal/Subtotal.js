@@ -6,7 +6,7 @@ export default class Subtotal extends Component {
         return(
             <Row className="show-grid">
             <Col md={6}>
-            Subtotal:
+            Price:
             </Col>
             <Col md={6}>
                 {

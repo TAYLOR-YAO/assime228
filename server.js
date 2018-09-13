@@ -4,10 +4,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const inventoryRoutes = require("./routes/inventory-routes")
 const storeRoutes = require("./routes/stores-routes");
-const cartRoutes = require("./routes/cart-routes");
+const DeliveredRoutes = require("./routes/Delivered-routes");
 const userRoutes = require("./routes/signin-routes");
 const sellsRoutes = require("./routes/sells-routes");
 const updatesRoutes = require("./routes/updates-routes");
+const paymentRoute = require("./routes/payment-routes");
+
 
 
 const path = require("path");
@@ -31,10 +33,14 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/assime228', ()=
 
 app.use("/api",inventoryRoutes);
 app.use("/api", storeRoutes);
-app.use("/api", cartRoutes);
+app.use("/api", DeliveredRoutes);
 app.use("/api", userRoutes);
 app.use("/api", sellsRoutes);
 app.use("/api", updatesRoutes);
+app.use("/api", paymentRoute);
+
+
+
 
 
 
@@ -48,4 +54,4 @@ app.get("*", (req, res)=>{
 // PORT Listener
 app.listen(PORT,()=>{
     console.log(`Listening on port: ${PORT}`);
-})
+});

@@ -1,9 +1,9 @@
 module.exports = {
     Inventory: require("./Inventory"),
-    Cart: require("./Cart"),
+    Delivered: require("./Delivered"),
     Sells: require("./Sells"),
     Users: require("./Auth/Users"),
     UserSession: require("./Auth/UserSession"),
-    Stores: require("./Stores")
+    Stores: require("./Stores"),
    
   };

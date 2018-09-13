@@ -19,13 +19,17 @@ const SellSchema = new Schema({
         type: Schema.Types.Decimal128,
         required:true
     },
+    size:{
+        type: String,
+        default: ""
+    },
     quantity:{
         type:Number,
         required:true
     },
     customerID:{
         type: String,
-        required:true
+        default: ""
     },
     both:{
         type:Number,
@@ -52,6 +56,22 @@ const SellSchema = new Schema({
         required: true
     },
     type:{
+        type:String,
+        require:true
+    },
+    customerEmail:{
+        type:String,
+        require:true
+    },
+    customerName: {
+        type:String,
+        require:true
+    },
+    customerAddress:{
+        type:String,
+        require:true
+    },
+    inventoryID: {
         type:String,
         require:true
     },

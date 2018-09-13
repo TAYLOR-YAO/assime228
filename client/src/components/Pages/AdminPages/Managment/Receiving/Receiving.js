@@ -20,6 +20,7 @@ class Receiving extends Component {
         name: "",
         image: null,
         price:  "",
+        size: "",
         both:   "",
         details:    "",
         category:   "",
@@ -37,8 +38,6 @@ class Receiving extends Component {
         });
     }
 
-
-
     // handleImageChange = event => {
     //     event.preventDefault();        
 
@@ -50,6 +49,7 @@ class Receiving extends Component {
     handleInputsChanges = event => {
         const { target: { name, value } } = event;
         this.setState({ [name]: value });
+        console.log(event.target.value)
     }
 
     handleSignUpSubmit = event => {
@@ -86,7 +86,6 @@ class Receiving extends Component {
                         <Cell col={3}>
                             <h6>Iteme Image</h6>
                             {/* <input type="file" onChange={this.handleImageChange}/> */}
-
                             <Textfield
                                 label="Iteme Image Url"
                                 floatingLabel
@@ -138,10 +137,21 @@ class Receiving extends Component {
                     </Grid>
 
                     <Grid>
+
+                        <Cell col={3}>
+                            <h6>Size</h6>
+                            <Textfield
+                                label="Item size"
+                                floatingLabel
+                                style={{width: '100%'}}
+                                name="size"
+                                onChange={this.handleInputsChanges}
+                            />
+                        </Cell>
                         <Cell col={3}>
                             <h6>Item Type</h6>
                             <Textfield
-                            label="Item Type"
+                            label="Key word"
                             floatingLabel
                             style={{width: '100%'}}
                             name="type"
@@ -168,8 +178,10 @@ class Receiving extends Component {
                             onChange={this.handleInputsChanges}
                             />
                         </Cell>
-                        <Cell col={3}>
-                            <h6>Item Details</h6>
+                    </Grid>
+                    <Grid>
+                        <Cell col={6}>
+                        <h6>Item Details</h6>
                             <Textfield
                                 label="Item Details"
                                 floatingLabel
@@ -178,8 +190,11 @@ class Receiving extends Component {
                                 onChange={this.handleInputsChanges}
                             />
                         </Cell>
+                        <Cell col={6}>
+                            <Button className="receiving-submut" raised style={{background:`${valideted().storeColor}`, color:`${valideted().textColor}`}} onClick={this.handleSignUpSubmit}>Submit</Button>
+                        </Cell>                        
                     </Grid>
-                    <Button className="receiving-submut" raised style={{background:`${valideted().storeColor}`, color:`${valideted().textColor}`}} onClick={this.handleSignUpSubmit}>Submit</Button>
+                    
                 </Cell>
             </Grid>
         </div>

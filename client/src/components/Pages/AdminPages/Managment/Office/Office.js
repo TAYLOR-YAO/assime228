@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import "./Office.css";
 import AdminHome from "../OfficeHome";
 import Inventory from "../Inventory";
-import OrderReview from "../OrderReview";
+import DeliveredItem from "../DeliveredItem";
 import Sells from "../Sells";
 import Receiving from "../Receiving";
 import LayoutView from "../LayoutView";
@@ -46,11 +46,11 @@ class Office extends Component{
                     <Tab eventKey={1} title="Office" >
                         <AdminHome/>
                     </Tab>
-                    <Tab eventKey={2} title="Order review">
-                        <OrderReview/>
-                    </Tab>
-                    <Tab eventKey={3} title="Sells" >
+                    <Tab eventKey={2} title="Sells" >
                         <Sells/>
+                    </Tab>
+                    <Tab eventKey={3} title="Delivereds" >
+                        <DeliveredItem/>
                     </Tab>
                     <Tab eventKey={4} title="Inventory" >
                         <Inventory/>
